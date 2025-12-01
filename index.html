@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ErgoMatrix | Active Posture. Smarter Work.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global Styles -->
+  <style>
+    :root {
+      --bg-main: #05070b;
+      --bg-elevated: #111319;
+      --accent: #d3a410;
+      --accent-soft: #d3a51054;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a3b1;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --glass: rgba(7, 9, 15, 0.84);
+      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.3s ease-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      color: var(--text-main);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
+      opacity: 0.85;
+      z-index: -1;
+    }
+
+    /* Floating header */
+    header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+      pointer-events: none;
+    }
+
+    .nav-shell {
+      width: min(1180px, 100% - 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.18),
+          rgba(8, 11, 20, 0.95),
+          rgba(112, 82, 255, 0.16)
+        );
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      pointer-events: auto;
+      transition: transform var(--transition-med), background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .nav-shell.scrolled {
+      transform: translateY(-6px) scale(0.98);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.16),
+          rgba(5, 7, 13, 0.96),
+          rgba(64, 51, 178, 0.26)
+        );
+      border-color: rgba(211, 165, 16, 0.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(211, 165, 16, 0.7);
+      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.7),
+        0 0 40px rgba(64, 51, 178, 0.6);
+    }
+
+    .logo-text-main {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.82rem;
+    }
+
+    nav a {
+      position: relative;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 3px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0;
+      transform: scaleX(0.25);
+      transform-origin: center;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+
+    nav a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      margin-left: 4px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
+        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 20px rgba(211, 165, 16, 0.5),
+        0 12px 32px rgba(0, 0, 0, 0.9);
+      transform-origin: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 30px rgba(211, 165, 16, 0.8),
+        0 16px 40px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.03);
+    }
+
+    .nav-cta span {
+      font-size: 0.9em;
+    }
+
+    .nav-cta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #161001;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Loader overlay (using your SVG) */
+    .loader-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #151827 0, #05070b 55%, #020309 100%);
+      z-index: 100;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    .loader-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 24px 32px;
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 14, 0.92);
+      border: 1px solid rgba(211, 165, 16, 0.4);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .loader-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    /* From Uiverse.io by Juanes200122 */
+    .loader-container svg {
+      width: 120px;
+      height: 120px;
+    }
+
+    .container {
+      background-color: #414141;
+    }
+    @keyframes bounce {
+      0%, 100% { translate: 0px 36px; }
+      50% { translate: 0px 46px; }
+    }
+    @keyframes bounce2 {
+      0%, 100% { translate: 0px 46px; }
+      50% { translate: 0px 56px; }
+    }
+    @keyframes umbral {
+      0% { stop-color: #d3a5102e; }
+      50% { stop-color: rgba(211, 165, 16, 0.519); }
+      100% { stop-color: #d3a5102e; }
+    }
+    @keyframes partciles {
+      0%, 100% { translate: 0px 16px; }
+      50% { translate: 0px 6px; }
+    }
+    #particles {
+      animation: partciles 4s ease-in-out infinite;
+    }
+    #animatedStop {
+      animation: umbral 4s infinite;
+    }
+    #bounce {
+      animation: bounce 4s ease-in-out infinite;
+      translate: 0px 36px;
+    }
+    #bounce2 {
+      animation: bounce2 4s ease-in-out infinite;
+      translate: 0px 46px;
+      animation-delay: 0.5s;
+    }
+
+    /* Main layout */
+    main {
+      min-height: 100vh;
+      padding-top: 96px;
+      padding-bottom: 80px;
+    }
+
+    .shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      padding: 48px 0 40px;
+    }
+
+    .hero-left {
+      position: relative;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(211, 165, 16, 0.55);
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+    }
+
+    .pill-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      box-shadow:
+        0 0 14px rgba(211, 165, 16, 0.8),
+        0 0 26px rgba(120, 82, 255, 0.7);
+    }
+
+    .pill span {
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(2.3rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero-title strong {
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(211, 165, 16, 0.45);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(6, 7, 12, 0.85);
+      color: var(--text-muted);
+    }
+
+    .chip.gold {
+      border-color: rgba(211, 165, 16, 0.6);
+      color: #fceeb8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      box-shadow:
+        0 0 20px rgba(211, 165, 16, 0.5),
+        0 20px 40px rgba(0, 0, 0, 0.95);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 30px rgba(211, 165, 16, 0.9),
+        0 24px 50px rgba(0, 0, 0, 0.98);
+      filter: brightness(1.03);
+    }
+
+    .btn-ghost {
+      background: rgba(4, 7, 15, 0.9);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(211, 165, 16, 0.6);
+      background: rgba(4, 7, 15, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .hero-footnote {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(7, 9, 17, 0.95), rgba(3, 3, 7, 0.98));
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.35), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(120, 82, 255, 0.38), transparent 55%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr);
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .hero-card-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .hero-card-pill {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(211, 165, 16, 0.6);
+      background: rgba(14, 10, 4, 0.92);
+      color: #fbeec4;
+    }
+
+    .hero-card-body {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr);
+      justify-content: center;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .hero-card-visual {
+      position: relative;
+      padding: 10px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 70%);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .hero-card-visual-inner {
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #151827, #05070b 60%, #04050a 100%);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      position: relative;
+    }
+
+    .tag-pill {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(211, 165, 16, 0.65);
+      color: #fbe6a6;
+      z-index: 2;
+    }
+
+    .hero-card-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      border-radius: 14px;
+      background: rgba(8, 10, 17, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 8px 10px;
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .metric-value {
+      font-size: 0.92rem;
+    }
+
+    .metric-value strong {
+      color: #f6e4a3;
+    }
+
+    .metric-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card-footer a {
+      color: #fbe6a6;
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(211, 165, 16, 0.4);
+      padding-bottom: 2px;
+    }
+
+    .hero-badge-strip {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .hero-badge {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      background: rgba(5, 7, 11, 0.95);
+    }
+
+    /* Sections */
+    section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med), transform var(--transition-med);
+      transform: translate3d(-10%, -10%, 0);
+    }
+
+    .card:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.95),
+        0 0 30px rgba(211, 165, 16, 0.2);
+      border-color: rgba(211, 165, 16, 0.5);
+      background: rgba(9, 11, 20, 0.98);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .card-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .card-link {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #fbe6a6;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      padding: 18px 0 22px;
+      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+    }
+
+    .footer-shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 30px rgba(211, 165, 16, 0.9),
+        0 0 70px rgba(0, 0, 0, 1);
+      margin-bottom: 8px;
+    }
+
+    .footer-credits {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer-credits span {
+      color: #f1e0a8;
+    }
+
+    .footer-links {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fbe6a6;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-shell {
+        gap: 10px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      main {
+        padding-top: 88px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader-overlay" id="loaderOverlay">
+    <div class="loader-container">
+      <!-- Your SVG loader -->
+      <svg xmlns="http://www.w3.org/2000/svg" height="200" width="200">
+        <g style="order: -1;">
+          <polygon
+            transform="rotate(45 100 100)"
+            stroke-width="1"
+            stroke="#d3a410"
+            fill="none"
+            points="70,70 148,50 130,130 50,150"
+            id="bounce"
+          ></polygon>
+          <polygon
+            transform="rotate(45 100 100)"
+            stroke-width="1"
+            stroke="#d3a410"
+            fill="none"
+            points="70,70 148,50 130,130 50,150"
+            id="bounce2"
+          ></polygon>
+          <polygon
+            transform="rotate(45 100 100)"
+            stroke-width="2"
+            stroke=""
+            fill="#414750"
+            points="70,70 150,50 130,130 50,150"
+          ></polygon>
+          <polygon
+            stroke-width="2"
+            stroke=""
+            fill="url(#gradiente)"
+            points="100,70 150,100 100,130 50,100"
+          ></polygon>
+          <defs>
+            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente">
+              <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
+              <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
+            </linearGradient>
+          </defs>
+          <polygon
+            transform="translate(20, 31)"
+            stroke-width="2"
+            stroke=""
+            fill="#b7870f"
+            points="80,50 80,75 80,99 40,75"
+          ></polygon>
+          <polygon
+            transform="translate(20, 31)"
+            stroke-width="2"
+            stroke=""
+            fill="url(#gradiente2)"
+            points="40,-40 80,-40 80,99 40,75"
+          ></polygon>
+          <defs>
+            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="gradiente2">
+              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+              <stop
+                style="stop-color:#d3a51054;stop-opacity:1"
+                offset="100%"
+                id="animatedStop"
+              ></stop>
+            </linearGradient>
+          </defs>
+          <polygon
+            transform="rotate(180 100 100) translate(20, 20)"
+            stroke-width="2"
+            stroke=""
+            fill="#d3a410"
+            points="80,50 80,75 80,99 40,75"
+          ></polygon>
+          <polygon
+            transform="rotate(0 100 100) translate(60, 20)"
+            stroke-width="2"
+            stroke=""
+            fill="url(#gradiente3)"
+            points="40,-40 80,-40 80,85 40,110.2"
+          ></polygon>
+          <defs>
+            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente3">
+              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+              <stop
+                style="stop-color:#d3a51054;stop-opacity:1"
+                offset="100%"
+                id="animatedStop"
+              ></stop>
+            </linearGradient>
+          </defs>
+          <polygon
+            transform="rotate(45 100 100) translate(80, 95)"
+            stroke-width="2"
+            stroke=""
+            fill="#ffe4a1"
+            points="5,0 5,5 0,5 0,0"
+            id="particles"
+          ></polygon>
+          <polygon
+            transform="rotate(45 100 100) translate(80, 55)"
+            stroke-width="2"
+            stroke=""
+            fill="#ccb069"
+            points="6,0 6,6 0,6 0,0"
+            id="particles"
+          ></polygon>
+          <polygon
+            transform="rotate(45 100 100) translate(70, 80)"
+            stroke-width="2"
+            stroke=""
+            fill="#fff"
+            points="2,0 2,2 0,2 0,0"
+            id="particles"
+          ></polygon>
+          <polygon
+            stroke-width="2"
+            stroke=""
+            fill="#292d34"
+            points="29.5,99.8 100,142 100,172 29.5,130"
+          ></polygon>
+          <polygon
+            transform="translate(50, 92)"
+            stroke-width="2"
+            stroke=""
+            fill="#1f2127"
+            points="50,50 120.5,8 120.5,35 50,80"
+          ></polygon>
+        </g>
+      </svg>
+      <div class="loader-label">Initializing posture matrix...</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-shell" id="navShell">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">ErgoMatrix</div>
+          <div class="logo-text-sub">Posture Pro System</div>
+        </div>
+      </a>
+      <nav>
+        <a href="about.html">About & Future</a>
+        <a href="products.html">Products</a>
+        <a href="how-to-use.html">How To Use</a>
+        <a href="ai-chatbot.html">AI Posture Coach</a>
+        <a href="credits.html">Credits</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location.href='products.html'">
+        <span>Buy Posture Pro</span>
+        <span class="nav-cta-dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="pill">
+            <div class="pill-dot"></div>
+            <span>Active posture. Smarter work.</span>
+          </div>
+
+          <h1 class="hero-title">
+            Train your posture like<br />
+            <strong>an intelligent system</strong>.
+          </h1>
+
+          <p class="hero-sub">
+            ErgoMatrix pairs the Eye-Q Sensor and Mesh-Up chair cover to create a
+            real-time feedback loop that detects slumps and gently corrects your posture
+            before pain and fatigue take over.
+          </p>
+
+          <div class="hero-tags">
+            <span class="chip gold">Live feedback</span>
+            <span class="chip">Sensor + haptic mesh</span>
+            <span class="chip">Desk worker wellness</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="products.html" class="btn-primary">
+              <span>Explore Posture Pro</span>
+            </a>
+            <a href="#how-it-works" class="btn-ghost">
+              <span>See how it works</span>
+            </a>
+          </div>
+
+          <p class="hero-footnote">
+            Designed for coders, creators, founders, and anyone who lives at a desk.
+          </p>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="hero-card-header">
+                <div class="hero-card-title">Posture Pro Live</div>
+                <div class="hero-card-pill">Eye-Q + Mesh-Up</div>
+              </div>
+              <div class="hero-card-body">
+                <div class="hero-card-visual">
+                  <div class="hero-card-visual-inner">
+                    <div class="tag-pill">Real-time posture loop</div>
+                    <!-- Re-use loader as a hologram-like visual -->
+                    <div style="display:flex;align-items:center;justify-content:center;padding-top:28px;padding-bottom:12px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="160" width="160">
+                        <g style="order: -1;">
+                          <polygon
+                            transform="rotate(45 100 100)"
+                            stroke-width="1"
+                            stroke="#d3a410"
+                            fill="none"
+                            points="70,70 148,50 130,130 50,150"
+                            id="bounce"
+                          ></polygon>
+                          <polygon
+                            transform="rotate(45 100 100)"
+                            stroke-width="1"
+                            stroke="#d3a410"
+                            fill="none"
+                            points="70,70 148,50 130,130 50,150"
+                            id="bounce2"
+                          ></polygon>
+                          <polygon
+                            transform="rotate(45 100 100)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#414750"
+                            points="70,70 150,50 130,130 50,150"
+                          ></polygon>
+                          <polygon
+                            stroke-width="2"
+                            stroke=""
+                            fill="url(#gradiente)"
+                            points="100,70 150,100 100,130 50,100"
+                          ></polygon>
+                          <defs>
+                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente">
+                              <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
+                              <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
+                            </linearGradient>
+                          </defs>
+                          <polygon
+                            transform="translate(20, 31)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#b7870f"
+                            points="80,50 80,75 80,99 40,75"
+                          ></polygon>
+                          <polygon
+                            transform="translate(20, 31)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="url(#gradiente2)"
+                            points="40,-40 80,-40 80,99 40,75"
+                          ></polygon>
+                          <defs>
+                            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="gradiente2">
+                              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+                              <stop
+                                style="stop-color:#d3a51054;stop-opacity:1"
+                                offset="100%"
+                                id="animatedStop"
+                              ></stop>
+                            </linearGradient>
+                          </defs>
+                          <polygon
+                            transform="rotate(180 100 100) translate(20, 20)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#d3a410"
+                            points="80,50 80,75 80,99 40,75"
+                          ></polygon>
+                          <polygon
+                            transform="rotate(0 100 100) translate(60, 20)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="url(#gradiente3)"
+                            points="40,-40 80,-40 80,85 40,110.2"
+                          ></polygon>
+                          <defs>
+                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente3">
+                              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+                              <stop
+                                style="stop-color:#d3a51054;stop-opacity:1"
+                                offset="100%"
+                                id="animatedStop"
+                              ></stop>
+                            </linearGradient>
+                          </defs>
+                          <polygon
+                            transform="rotate(45 100 100) translate(80, 95)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#ffe4a1"
+                            points="5,0 5,5 0,5 0,0"
+                            id="particles"
+                          ></polygon>
+                          <polygon
+                            transform="rotate(45 100 100) translate(80, 55)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#ccb069"
+                            points="6,0 6,6 0,6 0,0"
+                            id="particles"
+                          ></polygon>
+                          <polygon
+                            transform="rotate(45 100 100) translate(70, 80)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#fff"
+                            points="2,0 2,2 0,2 0,0"
+                            id="particles"
+                          ></polygon>
+                          <polygon
+                            stroke-width="2"
+                            stroke=""
+                            fill="#292d34"
+                            points="29.5,99.8 100,142 100,172 29.5,130"
+                          ></polygon>
+                          <polygon
+                            transform="translate(50, 92)"
+                            stroke-width="2"
+                            stroke=""
+                            fill="#1f2127"
+                            points="50,50 120.5,8 120.5,35 50,80"
+                          ></polygon>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="hero-card-metrics">
+                      <div class="metric">
+                        <div class="metric-label">Desk distance</div>
+                        <div class="metric-value"><strong>Optimal</strong> · 55cm</div>
+                        <div class="metric-sub">Eye-Q sensor tracking</div>
+                      </div>
+                      <div class="metric">
+                        <div class="metric-label">Posture alerts</div>
+                        <div class="metric-value"><strong>Live</strong> · haptic</div>
+                        <div class="metric-sub">Mesh-Up lower back cues</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hero-card-footer">
+                  <span>Turn any ordinary chair into an intelligent posture trainer in minutes.</span>
+                  <a href="how-to-use.html">Quick setup</a>
+                </div>
+              </div>
+            </div>
+            <div class="hero-badge-strip">
+              <span class="hero-badge">UV Optics</span>
+              <span class="hero-badge">Haptic Mesh</span>
+              <span class="hero-badge">Desk Worker Ready</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works teaser -->
+      <section id="how-it-works">
+        <div class="section-header">
+          <div class="section-title">How it works</div>
+          <div class="section-kicker">The feedback loop behind ErgoMatrix</div>
+        </div>
+        <div class="cards-row">
+          <div class="card" onclick="window.location.href='about.html'">
+            <div class="card-label">Eye-Q Sensor</div>
+            <div class="card-title">See every slump</div>
+            <p class="card-body">
+              A compact desk sensor measures your head-to-screen distance with precision optics,
+              detecting when you lean too close or sink away from ergonomic alignment.
+            </p>
+            <div class="card-link">Learn about the vision →</div>
+          </div>
+          <div class="card" onclick="window.location.href='products.html'">
+            <div class="card-label">Mesh-Up</div>
+            <div class="card-title">Feel the correction</div>
+            <p class="card-body">
+              A universal mesh cover wraps around your chair and delivers gentle, localized
+              haptic feedback at your lower back whenever posture drifts.
+            </p>
+            <div class="card-link">View the hardware →</div>
+          </div>
+          <div class="card" onclick="window.location.href='ai-chatbot.html'">
+            <div class="card-label">AI posture coach</div>
+            <div class="card-title">Guidance on demand</div>
+            <p class="card-body">
+              A Gemini-powered chatbot helps you troubleshoot discomfort, tune your setup,
+              and build healthier daily posture habits in real time.
+            </p>
+            <div class="card-link">Open AI coach →</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-shell">
+      <div class="footer-name">ErgoMatrix</div>
+      <div class="footer-credits">
+        Website by <span>Tanuj Sharma</span> & <span>Sparsh Jain</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="credits.html">Credits</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hide loader after page load
+    window.addEventListener("load", () => {
+      const overlay = document.getElementById("loaderOverlay");
+      if (overlay) {
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+        }, 700);
+      }
+    });
+
+    // Header scroll effect
+    const navShell = document.getElementById("navShell");
+    window.addEventListener("scroll", () => {
+      if (!navShell) return;
+      if (window.scrollY > 20) {
+        navShell.classList.add("scrolled");
+      } else {
+        navShell.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>
