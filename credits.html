@@ -56,7 +56,7 @@
       z-index: -1;
     }
 
-    /* Floating header */
+    /* Floating header - FIXED: Added pointer-events management */
     header {
       position: fixed;
       inset-inline: 0;
@@ -65,6 +65,7 @@
       display: flex;
       justify-content: center;
       padding: 16px 0;
+      pointer-events: none;
     }
 
     .nav-shell {
@@ -85,6 +86,7 @@
       backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
         border-color var(--transition-fast);
     }
@@ -206,6 +208,10 @@
       filter: brightness(1.03);
     }
 
+    .nav-cta span {
+      font-size: 0.9em;
+    }
+
     .nav-cta-dot {
       width: 8px;
       height: 8px;
@@ -225,7 +231,7 @@
       margin: 0 auto;
     }
 
-    /* Page header */
+    /* Page header - FIXED: semantic structure */
     .page-header {
       padding: 40px 0 24px;
       text-align: center;
@@ -244,6 +250,9 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 10px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .page-pill-dot {
@@ -279,7 +288,7 @@
       line-height: 1.7;
     }
 
-    /* Credits grid */
+    /* Credits grid - FIXED: Added proper heading hierarchy */
     .credits-grid {
       margin-top: 28px;
       display: grid;
@@ -320,9 +329,11 @@
       margin-bottom: 4px;
     }
 
+    /* FIXED: Made credit-name a proper heading */
     .credit-name {
       font-size: 1.05rem;
       margin-bottom: 4px;
+      font-weight: 600;
     }
 
     .credit-role {
@@ -350,7 +361,7 @@
       background: rgba(5, 7, 11, 0.98);
     }
 
-    /* Tech stack section */
+    /* Tech stack section - FIXED: List structure */
     .tech-section {
       margin-top: 30px;
       border-radius: var(--radius-lg);
@@ -375,10 +386,14 @@
       line-height: 1.7;
     }
 
+    /* FIXED: Changed to list structure for semantic HTML */
     .tech-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     .tech-tag {
@@ -507,7 +522,8 @@
 
   <main>
     <div class="shell">
-      <header class="page-header">
+      <!-- FIXED: Changed from <header> to <section> -->
+      <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
           <span>Credits</span>
@@ -519,13 +535,14 @@
           This cinematic, dark themed experience and the local posture coach were handcrafted
           specifically for the ErgoMatrix Posture Pro concept.
         </p>
-      </header>
+      </section>
 
-      <section class="credits-grid">
+      <!-- FIXED: Added proper heading hierarchy in cards -->
+      <section class="credits-grid" aria-label="Team credits">
         <article class="credit-card">
           <div class="credit-inner">
             <div class="credit-label">Creator</div>
-            <div class="credit-name">Tanuj Sharma</div>
+            <h2 class="credit-name">Tanuj Sharma</h2>
             <div class="credit-role">Concept · Design · Frontend development</div>
             <p class="credit-body">
               Led the overall vision for the ErgoMatrix website, crafted the dark cinematic theme,
@@ -539,7 +556,7 @@
         <article class="credit-card">
           <div class="credit-inner">
             <div class="credit-label">Creator</div>
-            <div class="credit-name">Sparsh Jain</div>
+            <h2 class="credit-name">Sparsh Jain</h2>
             <div class="credit-role">Design · Frontend logic · Chatbot behavior</div>
             <p class="credit-body">
               Helped shape the UI details, interactions, and the local FAQ chatbot logic so that all
@@ -553,7 +570,7 @@
         <article class="credit-card">
           <div class="credit-inner">
             <div class="credit-label">ErgoMatrix concept</div>
-            <div class="credit-name">Posture Pro system</div>
+            <h2 class="credit-name">Posture Pro system</h2>
             <div class="credit-role">Eye-Q Sensor · Mesh-Up chair cover</div>
             <p class="credit-body">
               The content and structure of this site are centered around the Posture Pro system,
@@ -565,26 +582,27 @@
         </article>
       </section>
 
-      <section class="tech-section">
-        <div class="tech-title">Tech stack & features</div>
+      <!-- FIXED: Changed tech tags to semantic list -->
+      <section class="tech-section" aria-labelledby="techTitle">
+        <h2 class="tech-title" id="techTitle">Tech stack & features</h2>
         <p class="tech-body">
           This website is built as a multi-page experience using HTML, CSS, and JavaScript, with a
           cinematic dark mode, animated SVG loader, floating header, product cards, usage stepper,
           and a fully local posture FAQ chatbot.
         </p>
-        <div class="tech-tags">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
-          <span class="tech-tag">SVG Loader</span>
-          <span class="tech-tag">Dark theme</span>
-          <span class="tech-tag">Floating header</span>
-          <span class="tech-tag">Local FAQ chatbot</span>
-        </div>
+        <ul class="tech-tags" aria-label="Technologies used">
+          <li class="tech-tag">HTML</li>
+          <li class="tech-tag">CSS</li>
+          <li class="tech-tag">JavaScript</li>
+          <li class="tech-tag">SVG Loader</li>
+          <li class="tech-tag">Dark theme</li>
+          <li class="tech-tag">Floating header</li>
+          <li class="tech-tag">Local FAQ chatbot</li>
+        </ul>
       </section>
 
-      <section class="brand-banner">
-        <div class="brand-name">ErgoMatrix</div>
+      <section class="brand-banner" aria-label="Brand information">
+        <div class="brand-name" aria-label="ErgoMatrix">ErgoMatrix</div>
         <div class="brand-caption">
           Website and AI experience by <strong>Tanuj Sharma</strong> &amp; <strong>Sparsh Jain</strong>.
         </div>
