@@ -206,6 +206,10 @@
       filter: brightness(1.03);
     }
 
+    .nav-cta span {
+      font-size: 0.9em;
+    }
+
     .nav-cta-dot {
       width: 8px;
       height: 8px;
@@ -225,7 +229,7 @@
       margin: 0 auto;
     }
 
-    /* Page header */
+    /* Page header - FIXED: semantic structure */
     .page-header {
       padding: 40px 0 24px;
       display: flex;
@@ -245,6 +249,7 @@
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      width: fit-content;
     }
 
     .page-pill-dot {
@@ -295,7 +300,6 @@
       padding: 16px 16px 18px;
       overflow: hidden;
       transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
-      cursor: pointer;
     }
 
     .product-card::before {
@@ -415,6 +419,17 @@
       cursor: pointer;
       font-size: 0.85rem;
       padding: 0;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .qty-btn:hover {
+      background: rgba(211, 165, 16, 0.2);
+      transform: scale(1.1);
+    }
+
+    .qty-btn:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline-offset: 2px;
     }
 
     .qty-value {
@@ -503,6 +518,14 @@
       box-shadow:
         0 0 20px rgba(211, 165, 16, 0.5),
         0 14px 34px rgba(0, 0, 0, 0.9);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-checkout:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 28px rgba(211, 165, 16, 0.8),
+        0 18px 40px rgba(0, 0, 0, 0.96);
     }
 
     .checkout-note {
@@ -528,7 +551,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
+    /* FIXED: Proper button semantics for FAQ */
     .faq-question {
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -536,6 +561,20 @@
       cursor: pointer;
       font-size: 0.86rem;
       color: var(--text-main);
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: inherit;
+      transition: color var(--transition-fast);
+    }
+
+    .faq-question:hover {
+      color: #fbe6a6;
+    }
+
+    .faq-question:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline-offset: 2px;
     }
 
     .faq-answer {
@@ -560,9 +599,15 @@
       justify-content: center;
       font-size: 0.8rem;
       flex-shrink: 0;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
     }
 
-    /* Modal */
+    .faq-question[aria-expanded="true"] .faq-toggle {
+      transform: rotate(45deg);
+      border-color: rgba(211, 165, 16, 0.8);
+    }
+
+    /* Modal - FIXED: Proper accessibility */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -602,6 +647,17 @@
       text-transform: uppercase;
       letter-spacing: 0.13em;
       cursor: pointer;
+      transition: transform var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .modal-btn:hover {
+      transform: scale(1.02);
+      filter: brightness(1.05);
+    }
+
+    .modal-btn:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.8);
+      outline-offset: 2px;
     }
 
     /* Footer */
@@ -675,10 +731,10 @@
   </style>
 </head>
 <body>
-  <!-- Modal -->
-  <div class="modal-backdrop" id="modalBackdrop">
+  <!-- Modal - FIXED: Added proper ARIA attributes -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal" id="modal">
-      <div class="modal-title">Demo checkout</div>
+      <h2 class="modal-title" id="modalTitle">Demo checkout</h2>
       <p>
         This is a concept store for ErgoMatrix. In a real launch, this button would take
         you to a secure payment flow.
@@ -712,7 +768,8 @@
 
   <main>
     <div class="shell">
-      <header class="page-header">
+      <!-- FIXED: Changed from <header> to <section> -->
+      <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
           <span>Posture Pro hardware</span>
@@ -724,9 +781,9 @@
           Start with the Eye-Q Sensor or Mesh-Up, or get the full Posture Pro bundle to unlock
           the complete active feedback loop at your desk.
         </p>
-      </header>
+      </section>
 
-      <section class="products-grid">
+      <section class="products-grid" aria-label="Available products">
         <!-- Eye-Q Sensor -->
         <article class="product-card" data-product="eyeq">
           <div class="product-badge">Sensor only</div>
@@ -741,12 +798,13 @@
             <div class="product-tagline">Perfect if you already love your chair.</div>
           </div>
           <div class="product-actions">
-            <div class="qty-control">
-              <button class="qty-btn" data-action="minus" data-target="eyeq">-</button>
-              <span class="qty-value" id="qty-eyeq">1</span>
-              <button class="qty-btn" data-action="plus" data-target="eyeq">+</button>
+            <!-- FIXED: Added aria-labels for screen readers -->
+            <div class="qty-control" role="group" aria-label="Quantity selector for Eye-Q Sensor">
+              <button class="qty-btn" data-action="minus" data-target="eyeq" aria-label="Decrease quantity">-</button>
+              <span class="qty-value" id="qty-eyeq" aria-live="polite">1</span>
+              <button class="qty-btn" data-action="plus" data-target="eyeq" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn-buy" data-buy="eyeq">
+            <button class="btn-buy" data-buy="eyeq" aria-label="Add Eye-Q Sensor to cart">
               Add to cart
             </button>
           </div>
@@ -766,12 +824,12 @@
             <div class="product-tagline">Turn your favorite chair into a coach.</div>
           </div>
           <div class="product-actions">
-            <div class="qty-control">
-              <button class="qty-btn" data-action="minus" data-target="mesh">-</button>
-              <span class="qty-value" id="qty-mesh">1</span>
-              <button class="qty-btn" data-action="plus" data-target="mesh">+</button>
+            <div class="qty-control" role="group" aria-label="Quantity selector for Mesh-Up Chair Cover">
+              <button class="qty-btn" data-action="minus" data-target="mesh" aria-label="Decrease quantity">-</button>
+              <span class="qty-value" id="qty-mesh" aria-live="polite">1</span>
+              <button class="qty-btn" data-action="plus" data-target="mesh" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn-buy" data-buy="mesh">
+            <button class="btn-buy" data-buy="mesh" aria-label="Add Mesh-Up Chair Cover to cart">
               Add to cart
             </button>
           </div>
@@ -791,12 +849,12 @@
             <div class="product-tagline">Recommended for new ErgoMatrix users.</div>
           </div>
           <div class="product-actions">
-            <div class="qty-control">
-              <button class="qty-btn" data-action="minus" data-target="bundle">-</button>
-              <span class="qty-value" id="qty-bundle">1</span>
-              <button class="qty-btn" data-action="plus" data-target="bundle">+</button>
+            <div class="qty-control" role="group" aria-label="Quantity selector for Posture Pro Bundle">
+              <button class="qty-btn" data-action="minus" data-target="bundle" aria-label="Decrease quantity">-</button>
+              <span class="qty-value" id="qty-bundle" aria-live="polite">1</span>
+              <button class="qty-btn" data-action="plus" data-target="bundle" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn-buy" data-buy="bundle">
+            <button class="btn-buy" data-buy="bundle" aria-label="Add Posture Pro Bundle to cart">
               Add to cart
             </button>
           </div>
@@ -810,14 +868,14 @@
           live site. As you adjust quantities, the summary updates in real time, and the checkout
           button opens a cinematic confirmation modal instead of taking payment.
         </div>
-        <aside class="summary-card">
+        <aside class="summary-card" aria-label="Order summary">
           <div class="summary-row">
             <span>Items total</span>
-            <span id="summary-items">3</span>
+            <span id="summary-items" aria-live="polite">3</span>
           </div>
           <div class="summary-row">
             <span>Subtotal</span>
-            <span id="summary-subtotal">₹21,997</span>
+            <span id="summary-subtotal" aria-live="polite">₹21,997</span>
           </div>
           <div class="summary-row">
             <span>Estimated tax</span>
@@ -825,7 +883,7 @@
           </div>
           <div class="summary-row total">
             <span>Estimated total</span>
-            <span id="summary-total">₹21,997</span>
+            <span id="summary-total" aria-live="polite">₹21,997</span>
           </div>
           <button class="btn-checkout" id="checkoutBtn">
             Proceed to checkout (demo)
@@ -836,16 +894,16 @@
         </aside>
       </section>
 
-      <!-- FAQ -->
+      <!-- FAQ - FIXED: Proper button semantics with ARIA -->
       <section class="faq-section">
         <h2 class="faq-title">Product FAQ</h2>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
             <span>Will the Mesh-Up fit my current chair?</span>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
+            <div class="faq-toggle" aria-hidden="true">+</div>
+          </button>
+          <div class="faq-answer" id="faq-answer-1">
             <div class="faq-answer-inner">
               Mesh-Up is designed to fit most standard office chairs with a typical backrest. In the
               full spec sheet, you would see recommended dimensions and examples of compatible chair styles.
@@ -854,11 +912,11 @@
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
             <span>Do I need both the Eye-Q Sensor and Mesh-Up?</span>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
+            <div class="faq-toggle" aria-hidden="true">+</div>
+          </button>
+          <div class="faq-answer" id="faq-answer-2">
             <div class="faq-answer-inner">
               Eye-Q works great on its own for awareness of screen distance. Mesh-Up adds a physical nudge.
               The bundle connects them into a loop, which is the recommended experience if you are starting fresh.
@@ -867,11 +925,11 @@
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
             <span>Is the haptic feedback distracting while working?</span>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
+            <div class="faq-toggle" aria-hidden="true">+</div>
+          </button>
+          <div class="faq-answer" id="faq-answer-3">
             <div class="faq-answer-inner">
               The vibration is tuned to be gentle and brief, just enough to catch your attention without
               breaking deep focus. Intensity and frequency can be configurable in the software layer.
@@ -961,47 +1019,76 @@
     // "Add to cart" - just small animation
     document.querySelectorAll(".btn-buy").forEach(btn => {
       btn.addEventListener("click", () => {
+        const originalText = btn.textContent;
         btn.textContent = "Added ✔";
         setTimeout(() => {
-          btn.textContent = "Add to cart";
+          btn.textContent = originalText;
         }, 1200);
       });
     });
 
-    // FAQ accordion
+    // FAQ accordion - FIXED: Proper ARIA state management
     document.querySelectorAll(".faq-item").forEach(item => {
       const question = item.querySelector(".faq-question");
       const answer = item.querySelector(".faq-answer");
       const toggle = item.querySelector(".faq-toggle");
 
       question.addEventListener("click", () => {
-        const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
-        document.querySelectorAll(".faq-answer").forEach(a => (a.style.maxHeight = null));
+        const isOpen = question.getAttribute("aria-expanded") === "true";
+        
+        // Close all FAQs
+        document.querySelectorAll(".faq-question").forEach(q => {
+          q.setAttribute("aria-expanded", "false");
+          const ans = document.getElementById(q.getAttribute("aria-controls"));
+          if (ans) ans.style.maxHeight = null;
+        });
         document.querySelectorAll(".faq-toggle").forEach(t => (t.textContent = "+"));
 
+        // Open current if it was closed
         if (!isOpen) {
+          question.setAttribute("aria-expanded", "true");
           answer.style.maxHeight = answer.scrollHeight + "px";
           toggle.textContent = "–";
         }
       });
     });
 
-    // Modal
+    // Modal - FIXED: Proper focus management and ARIA
     const checkoutBtn = document.getElementById("checkoutBtn");
     const modalBackdrop = document.getElementById("modalBackdrop");
     const modalClose = document.getElementById("modalClose");
+    let lastFocusedElement;
 
-    checkoutBtn.addEventListener("click", () => {
+    function openModal() {
+      lastFocusedElement = document.activeElement;
       modalBackdrop.style.display = "flex";
-    });
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      // Focus the close button
+      setTimeout(() => modalClose.focus(), 100);
+    }
 
-    modalClose.addEventListener("click", () => {
+    function closeModal() {
       modalBackdrop.style.display = "none";
-    });
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      // Return focus to triggering element
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    }
+
+    checkoutBtn.addEventListener("click", openModal);
+    modalClose.addEventListener("click", closeModal);
 
     modalBackdrop.addEventListener("click", (e) => {
       if (e.target === modalBackdrop) {
-        modalBackdrop.style.display = "none";
+        closeModal();
+      }
+    });
+
+    // ESC key to close modal
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalBackdrop.style.display === "flex") {
+        closeModal();
       }
     });
 
