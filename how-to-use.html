@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ErgoMatrix | How To Use Posture Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-main: #05070b;
+      --bg-elevated: #111319;
+      --accent: #d3a410;
+      --accent-soft: #d3a51054;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a3b1;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --glass: rgba(7, 9, 15, 0.84);
+      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.3s ease-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      color: var(--text-main);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
+      opacity: 0.85;
+      z-index: -1;
+    }
+
+    /* Floating header */
+    header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+    }
+
+    .nav-shell {
+      width: min(1180px, 100% - 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.18),
+          rgba(8, 11, 20, 0.95),
+          rgba(112, 82, 255, 0.16)
+        );
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      transition: transform var(--transition-med), background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .nav-shell.scrolled {
+      transform: translateY(-6px) scale(0.98);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.16),
+          rgba(5, 7, 13, 0.96),
+          rgba(64, 51, 178, 0.26)
+        );
+      border-color: rgba(211, 165, 16, 0.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(211, 165, 16, 0.7);
+      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.7),
+        0 0 40px rgba(64, 51, 178, 0.6);
+    }
+
+    .logo-text-main {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+    }
+
+    nav a {
+      position: relative;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 3px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0;
+      transform: scaleX(0.25);
+      transform-origin: center;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+
+    nav a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      margin-left: 4px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
+        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 20px rgba(211, 165, 16, 0.5),
+        0 12px 32px rgba(0, 0, 0, 0.9);
+      transform-origin: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 30px rgba(211, 165, 16, 0.8),
+        0 16px 40px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.03);
+    }
+
+    .nav-cta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #161001;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    }
+
+    main {
+      min-height: 100vh;
+      padding-top: 96px;
+      padding-bottom: 80px;
+    }
+
+    .shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: 40px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .page-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(211, 165, 16, 0.55);
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .page-pill-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      box-shadow:
+        0 0 14px rgba(211, 165, 16, 0.8),
+        0 0 26px rgba(120, 82, 255, 0.7);
+    }
+
+    .page-title {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .page-title span {
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* Stepper */
+    .stepper {
+      margin-top: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      padding: 18px 18px 20px;
+    }
+
+    .stepper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stepper-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .stepper-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .mode-toggle {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(4, 6, 11, 0.96);
+      padding: 2px;
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .mode-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+    }
+
+    .stepper-progress {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .step-pill {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .step-pill-fill {
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #d3a410, #f3dd93);
+      transition: width 0.3s ease;
+    }
+
+    .step-labels {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .step-labels span {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .step-body {
+      margin-top: 4px;
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .step-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .step-text h2 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #fbe6a6;
+    }
+
+    .step-text ul {
+      margin-top: 8px;
+      padding-left: 18px;
+    }
+
+    .step-text li {
+      margin-bottom: 4px;
+    }
+
+    .step-visual {
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top, rgba(211, 165, 16, 0.18), transparent 60%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .step-visual-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 4px;
+      color: var(--accent-soft);
+    }
+
+    .stepper-controls {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .step-btn {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 6, 11, 0.96);
+      color: var(--text-main);
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .step-btn.primary {
+      border-color: rgba(211, 165, 16, 0.7);
+      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+    }
+
+    /* Interactive posture demo */
+    .demo-section {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .demo-card {
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .demo-title {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .demo-headline {
+      font-size: 1rem;
+      color: #fbe6a6;
+      margin-bottom: 6px;
+    }
+
+    .demo-body {
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .slider-row {
+      margin-top: 10px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .slider {
+      width: 100%;
+    }
+
+    .status-pill {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .silhouette-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, rgba(211, 165, 16, 0.16), transparent 60%);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .silhouette-title {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .silhouette-box {
+      height: 180px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at center, #151827, #05070b 70%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .silhouette {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 130px;
+      border-radius: 40px 40px 14px 14px;
+      background: linear-gradient(to bottom, #262a39, #101321);
+      box-shadow:
+        0 0 18px rgba(0, 0, 0, 0.8),
+        0 0 26px rgba(211, 165, 16, 0.12);
+    }
+
+    .silhouette-head {
+      position: absolute;
+      top: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #3a4255, #191d2a);
+    }
+
+    .screen {
+      position: absolute;
+      top: 40px;
+      right: 28px;
+      width: 80px;
+      height: 52px;
+      border-radius: 10px;
+      background: radial-gradient(circle at top, #151827, #05070b);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 0 18px rgba(211, 165, 16, 0.2);
+    }
+
+    .screen-glow {
+      position: absolute;
+      inset: 4px;
+      border-radius: 8px;
+      background: radial-gradient(circle at top, rgba(241, 231, 181, 0.32), rgba(5, 7, 12, 0.95));
+      opacity: 0.8;
+    }
+
+    .distance-label {
+      position: absolute;
+      top: 18px;
+      right: 10px;
+      font-size: 0.66rem;
+      color: var(--text-muted);
+    }
+
+    .tip-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Tips grid */
+    .tips-section {
+      margin-top: 28px;
+    }
+
+    .tips-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tips-title {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+
+    .tips-toggle {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .tip-card {
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 14px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .tip-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      margin-bottom: 4px;
+    }
+
+    .tip-title {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .tip-extra {
+      margin-top: 4px;
+      display: none;
+      font-size: 0.8rem;
+    }
+
+    .tips-long .tip-extra {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      padding: 18px 0 22px;
+      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+    }
+
+    .footer-shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 30px rgba(211, 165, 16, 0.9),
+        0 0 70px rgba(0, 0, 0, 1);
+      margin-bottom: 8px;
+    }
+
+    .footer-credits {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer-credits span {
+      color: #f1e0a8;
+    }
+
+    .footer-links {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fbe6a6;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 880px) {
+      .step.active {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .demo-section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-shell" id="navShell">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">ErgoMatrix</div>
+          <div class="logo-text-sub">Posture Pro System</div>
+        </div>
+      </a>
+      <nav>
+        <a href="about.html">About & Future</a>
+        <a href="products.html">Products</a>
+        <a href="how-to-use.html">How To Use</a>
+        <a href="ai-chatbot.html">AI Posture Coach</a>
+        <a href="credits.html">Credits</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location.href='products.html'">
+        <span>Buy Posture Pro</span>
+        <span class="nav-cta-dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <header class="page-header">
+        <div class="page-pill">
+          <div class="page-pill-dot"></div>
+          <span>How to use Posture Pro</span>
+        </div>
+        <h1 class="page-title">
+          Set up once, <span>benefit every day</span>.
+        </h1>
+        <p class="page-subtitle">
+          Follow these steps to place the Eye-Q Sensor, attach the Mesh-Up, and start receiving gentle,
+          intelligent posture cues while you work.
+        </p>
+      </header>
+
+      <!-- Stepper -->
+      <section class="stepper" id="stepper">
+        <div class="stepper-header">
+          <div class="stepper-title">Setup guide</div>
+          <div class="stepper-mode">
+            <span>Detail level</span>
+            <div class="mode-toggle">
+              <button class="mode-btn active" data-mode="quick">Quick</button>
+              <button class="mode-btn" data-mode="detailed">Detailed</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stepper-progress">
+          <div class="step-pill"><div class="step-pill-fill" id="bar-1"></div></div>
+          <div class="step-pill"><div class="step-pill-fill" id="bar-2"></div></div>
+          <div class="step-pill"><div class="step-pill-fill" id="bar-3"></div></div>
+          <div class="step-pill"><div class="step-pill-fill" id="bar-4"></div></div>
+        </div>
+        <div class="step-labels">
+          <span>Sensor</span>
+          <span>Mesh-Up</span>
+          <span>Connect</span>
+          <span>Train</span>
+        </div>
+
+        <div class="step-body">
+          <!-- Step 1 -->
+          <div class="step active" data-step="1">
+            <div class="step-text">
+              <h2>Step 1 — Place the Eye-Q Sensor</h2>
+              <p>
+                Position the Eye-Q Sensor on your desk, slightly off-center beneath your monitor, with a
+                clear line of sight to your forehead when you sit normally.
+              </p>
+              <ul>
+                <li>Keep it stable and not blocked by objects like notebooks or plants.</li>
+                <li>Angle it gently upward so the sensing window faces your head, not the keyboard.</li>
+                <li>Connect power and confirm the status light indicates it is ready.</li>
+              </ul>
+            </div>
+            <aside class="step-visual">
+              <div class="step-visual-title">Why this matters</div>
+              <p>
+                Eye-Q measures your head-to-screen distance. A clear view lets it detect when you lean in
+                or drift away, which is the first sign your posture is breaking down.
+              </p>
+            </aside>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step" data-step="2">
+            <div class="step-text">
+              <h2>Step 2 — Attach the Mesh-Up</h2>
+              <p>
+                Wrap Mesh-Up around your office chair backrest, keeping the lower vibration zone aligned
+                with the curve of your lower back when seated.
+              </p>
+              <ul>
+                <li>Use the straps to tighten Mesh-Up so it does not slip when you lean back.</li>
+                <li>Check that the haptic modules sit roughly behind your lumbar region.</li>
+                <li>Ensure the cable or power source is routed safely away from your feet and wheels.</li>
+              </ul>
+            </div>
+            <aside class="step-visual">
+              <div class="step-visual-title">Why this matters</div>
+              <p>
+                The closer Mesh-Up is to your lower back, the clearer each vibration feels as a cue—not a
+                distraction. Proper placement makes the feedback intuitive.
+              </p>
+            </aside>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step" data-step="3">
+            <div class="step-text">
+              <h2>Step 3 — Connect and calibrate</h2>
+              <p>
+                Open the ErgoMatrix app or web dashboard, connect to Eye-Q and Mesh-Up, and run the short
+                calibration flow to match your natural sitting height and screen setup.
+              </p>
+              <ul>
+                <li>Follow on-screen prompts to sit upright at your “healthy” distance as a baseline.</li>
+                <li>Choose your preferred sensitivity for posture alerts and vibration intensity.</li>
+                <li>Save your profile so the system recognizes you at this workstation.</li>
+              </ul>
+            </div>
+            <aside class="step-visual">
+              <div class="step-visual-title">Why this matters</div>
+              <p>
+                Calibration teaches the system what “good” looks like for your body and desk, so alerts
+                trigger only when posture truly deviates from that baseline.
+              </p>
+            </aside>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step" data-step="4">
+            <div class="step-text">
+              <h2>Step 4 — Start your posture training</h2>
+              <p>
+                Work as usual and let Posture Pro run quietly in the background. When Eye-Q detects a slump,
+                Mesh-Up sends a brief vibration to remind you to reset your position.
+              </p>
+              <ul>
+                <li>Respond to each cue by gently stacking your head over your shoulders and hips.</li>
+                <li>Check your dashboard occasionally to see your posture streaks and corrections.</li>
+                <li>Pair with short movement breaks every 45–60 minutes for best results.</li>
+              </ul>
+            </div>
+            <aside class="step-visual">
+              <div class="step-visual-title">Why this matters</div>
+              <p>
+                The small, repeated corrections add up. Over time, your default sitting posture improves,
+                even when the system is not actively reminding you.
+              </p>
+            </aside>
+          </div>
+        </div>
+
+        <div class="stepper-controls">
+          <button class="step-btn" id="prevStep">Previous</button>
+          <button class="step-btn primary" id="nextStep">Next step</button>
+        </div>
+      </section>
+
+      <!-- Interactive demo -->
+      <section class="demo-section">
+        <article class="demo-card">
+          <div class="demo-title">Interactive demo</div>
+          <h2 class="demo-headline">Screen distance and posture zone</h2>
+          <p class="demo-body">
+            Use the slider to simulate how close you sit to your monitor. Posture Pro aims to keep you in
+            the “comfort zone” where your eyes, neck, and spine are under the least strain.
+          </p>
+
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>Too close</span>
+              <span id="distanceLabel">Comfort zone · ~55cm</span>
+              <span>Too far</span>
+            </div>
+            <input type="range" min="30" max="90" value="55" class="slider" id="distanceSlider" />
+            <div class="status-pill" id="statusPill">
+              <span class="status-dot" id="statusDot"></span>
+              <span id="statusText">Good distance. Eye strain minimized, posture stable.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="silhouette-card">
+          <div class="silhouette-title">How your posture looks</div>
+          <div class="silhouette-box">
+            <div class="silhouette">
+              <div class="silhouette-head"></div>
+            </div>
+            <div class="screen">
+              <div class="screen-glow"></div>
+            </div>
+            <div class="distance-label" id="distanceBadge">~55cm</div>
+          </div>
+          <p class="tip-text" id="tipText">
+            In the comfort zone, your head stays roughly over your shoulders and hips. Eye-Q quietly
+            confirms this while Mesh-Up stays still in the background.
+          </p>
+        </aside>
+      </section>
+
+      <!-- Tips -->
+      <section class="tips-section">
+        <div class="tips-header">
+          <h2 class="tips-title">Daily posture habits</h2>
+          <div class="tips-toggle" id="tipsToggle">Show more detail</div>
+        </div>
+        <div class="tips-grid" id="tipsGrid">
+          <article class="tip-card">
+            <div class="tip-tag">Desk height</div>
+            <div class="tip-title">Keep elbows at ~90°</div>
+            <p>
+              Adjust your chair and desk so your elbows rest near a right angle when typing or using the mouse.
+            </p>
+            <p class="tip-extra">
+              This reduces tension in shoulders and forearms and keeps your wrists from bending sharply,
+              which pairs well with stable sitting posture.
+            </p>
+          </article>
+
+          <article class="tip-card">
+            <div class="tip-tag">Screen position</div>
+            <div class="tip-title">Top of screen at eye level</div>
+            <p>
+              Raise or lower your monitor so the top edge sits near your horizontal line of sight.
+            </p>
+            <p class="tip-extra">
+              Looking slightly downward with your eyes—not your neck—helps keep your head balanced over
+              your spine throughout long sessions.
+            </p>
+          </article>
+
+          <article class="tip-card">
+            <div class="tip-tag">Movement</div>
+            <div class="tip-title">Micro-breaks every hour</div>
+            <p>
+              Stand up, stretch, or walk for 30–60 seconds every 45–60 minutes, even when Posture Pro is active.
+            </p>
+            <p class="tip-extra">
+              Movement lets your discs rehydrate, your muscles reset, and your circulation improve, multiplying
+              the benefits of better sitting form.
+            </p>
+          </article>
+
+          <article class="tip-card">
+            <div class="tip-tag">Breathing</div>
+            <div class="tip-title">Use posture to reduce stress</div>
+            <p>
+              When Mesh-Up nudges you, pair the reset with one slow, deep breath to loosen neck and shoulders.
+            </p>
+            <p class="tip-extra">
+              A calmer breathing pattern plus upright posture can lower perceived stress and help you
+              stay focused longer without feeling drained.
+            </p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-shell">
+      <div class="footer-name">ErgoMatrix</div>
+      <div class="footer-credits">
+        Website by <span>Tanuj Sharma</span> & <span>Sparsh Jain</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="credits.html">Credits</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    const navShell = document.getElementById("navShell");
+    window.addEventListener("scroll", () => {
+      if (!navShell) return;
+      if (window.scrollY > 20) {
+        navShell.classList.add("scrolled");
+      } else {
+        navShell.classList.remove("scrolled");
+      }
+    });
+
+    // Stepper logic
+    const steps = Array.from(document.querySelectorAll(".step"));
+    const nextBtn = document.getElementById("nextStep");
+    const prevBtn = document.getElementById("prevStep");
+    const bars = [
+      document.getElementById("bar-1"),
+      document.getElementById("bar-2"),
+      document.getElementById("bar-3"),
+      document.getElementById("bar-4")
+    ];
+    let currentStep = 1;
+
+    function updateStepper() {
+      steps.forEach(step => {
+        step.classList.toggle("active", Number(step.dataset.step) === currentStep);
+      });
+      bars.forEach((bar, index) => {
+        const stepIndex = index + 1;
+        bar.style.width = stepIndex <= currentStep ? "100%" : "0%";
+      });
+      prevBtn.disabled = currentStep === 1;
+      nextBtn.textContent = currentStep === 4 ? "Finish" : "Next step";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < 4) {
+        currentStep++;
+        updateStepper();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepper();
+      }
+    });
+
+    updateStepper();
+
+    // Mode toggle (quick vs detailed)
+    const modeButtons = document.querySelectorAll(".mode-btn");
+    modeButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        modeButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const mode = btn.dataset.mode;
+        const lists = document.querySelectorAll(".step-text ul");
+        lists.forEach(list => {
+          list.style.display = mode === "quick" ? "none" : "block";
+        });
+      });
+    });
+
+    // Distance slider demo
+    const slider = document.getElementById("distanceSlider");
+    const statusPill = document.getElementById("statusPill");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+    const distanceLabel = document.getElementById("distanceLabel");
+    const distanceBadge = document.getElementById("distanceBadge");
+    const tipText = document.getElementById("tipText");
+
+    function updateDistanceUI(value) {
+      let state;
+      if (value < 45) state = "close";
+      else if (value > 70) state = "far";
+      else state = "comfort";
+
+      distanceLabel.textContent =
+        (state === "comfort" ? "Comfort zone" : state === "close" ? "Too close" : "Too far") +
+        " · ~" + value + "cm";
+      distanceBadge.textContent = "~" + value + "cm";
+
+      if (state === "comfort") {
+        statusPill.style.background = "rgba(24, 68, 45, 0.7)";
+        statusDot.style.background = "#35d07f";
+        statusText.textContent = "Good distance. Eye strain minimized, posture stable.";
+        tipText.textContent =
+          "In the comfort zone, your head stays roughly over your shoulders and hips. Eye-Q quietly " +
+          "confirms this while Mesh-Up stays still in the background.";
+      } else if (state === "close") {
+        statusPill.style.background = "rgba(100, 35, 35, 0.7)";
+        statusDot.style.background = "#ff5c5c";
+        statusText.textContent = "You are too close. Neck flexion and eye strain increase quickly.";
+        tipText.textContent =
+          "Leaning too close pulls your head forward and compresses your neck. Posture Pro would begin " +
+          "flagging slumps here so you can slide back and reset.";
+      } else {
+        statusPill.style.background = "rgba(64, 60, 110, 0.7)";
+        statusDot.style.background = "#ffd166";
+        statusText.textContent = "You are quite far. You may start leaning or squinting to see details.";
+        tipText.textContent =
+          "Sitting too far away can tempt you to lean forward or crane your neck. Adjust your chair " +
+          "and screen or move them closer so posture corrections stay easy.";
+      }
+    }
+
+    slider.addEventListener("input", (e) => {
+      updateDistanceUI(Number(e.target.value));
+    });
+
+    updateDistanceUI(Number(slider.value));
+
+    // Tips detail toggle
+    const tipsToggle = document.getElementById("tipsToggle");
+    const tipsGrid = document.getElementById("tipsGrid");
+    let tipsLong = false;
+
+    tipsToggle.addEventListener("click", () => {
+      tipsLong = !tipsLong;
+      if (tipsLong) {
+        tipsGrid.classList.add("tips-long");
+        tipsToggle.textContent = "Show less detail";
+      } else {
+        tipsGrid.classList.remove("tips-long");
+        tipsToggle.textContent = "Show more detail";
+      }
+    });
+  </script>
+</body>
+</html>
