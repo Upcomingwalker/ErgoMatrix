@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ErgoMatrix | AI Posture Coach (Local Bot)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-main: #05070b;
+      --bg-elevated: #111319;
+      --accent: #d3a410;
+      --accent-soft: #d3a51054;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a3b1;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.3s ease-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      color: var(--text-main);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
+      opacity: 0.85;
+      z-index: -1;
+    }
+
+    /* Floating header */
+    header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+    }
+
+    .nav-shell {
+      width: min(1180px, 100% - 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.18),
+          rgba(8, 11, 20, 0.95),
+          rgba(112, 82, 255, 0.16)
+        );
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      transition: transform var(--transition-med), background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .nav-shell.scrolled {
+      transform: translateY(-6px) scale(0.98);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.16),
+          rgba(5, 7, 13, 0.96),
+          rgba(64, 51, 178, 0.26)
+        );
+      border-color: rgba(211, 165, 16, 0.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(211, 165, 16, 0.7);
+      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.7),
+        0 0 40px rgba(64, 51, 178, 0.6);
+    }
+
+    .logo-text-main {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+    }
+
+    nav a {
+      position: relative;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 3px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0;
+      transform: scaleX(0.25);
+      transform-origin: center;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+
+    nav a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      margin-left: 4px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
+        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 20px rgba(211, 165, 16, 0.5),
+        0 12px 32px rgba(0, 0, 0, 0.9);
+      transform-origin: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 30px rgba(211, 165, 16, 0.8),
+        0 16px 40px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.03);
+    }
+
+    .nav-cta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #161001;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    }
+
+    main {
+      min-height: 100vh;
+      padding-top: 96px;
+      padding-bottom: 80px;
+    }
+
+    .shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+    }
+
+    /* Layout */
+    .page-header {
+      padding: 32px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .page-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(211, 165, 16, 0.55);
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .page-pill-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      box-shadow:
+        0 0 14px rgba(211, 165, 16, 0.8),
+        0 0 26px rgba(120, 82, 255, 0.7);
+    }
+
+    .page-title {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .page-title span {
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+      gap: 18px;
+      margin-top: 16px;
+      align-items: stretch;
+    }
+
+    /* Sidebar with examples */
+    .sidebar {
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      padding: 16px 14px 18px;
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sidebar-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .sidebar-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 6, 11, 0.96);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(211, 165, 16, 0.9);
+      box-shadow: 0 0 12px rgba(211, 165, 16, 0.8);
+    }
+
+    .sidebar-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      margin-top: 4px;
+    }
+
+    .example-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .example-pill {
+      font-size: 0.78rem;
+      padding: 7px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(9, 12, 20, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .example-pill:hover {
+      border-color: rgba(211, 165, 16, 0.7);
+      background: rgba(14, 14, 22, 0.98);
+    }
+
+    .sidebar-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Chat container */
+    .chat-shell {
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 16, 0.98);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      height: min(640px, calc(100vh - 150px));
+    }
+
+    .chat-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.7),
+        0 0 30px rgba(64, 51, 178, 0.4);
+    }
+
+    .chat-meta {
+      font-size: 0.78rem;
+    }
+
+    .chat-meta-title {
+      color: var(--text-main);
+    }
+
+    .chat-meta-sub {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .chat-controls {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .chat-control-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(4, 6, 11, 0.96);
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .chat-control-btn:hover {
+      border-color: rgba(211, 165, 16, 0.7);
+      color: #fbe6a6;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 12px 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.84rem;
+    }
+
+    .msg-row {
+      display: flex;
+      gap: 8px;
+      max-width: 92%;
+    }
+
+    .msg-row.user {
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+
+    .msg-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+    }
+
+    .msg-bubble {
+      padding: 8px 10px;
+      border-radius: 16px;
+      line-height: 1.6;
+      border: 1px solid transparent;
+      background: rgba(10, 12, 20, 0.96);
+      color: var(--text-main);
+    }
+
+    .msg-row.user .msg-bubble {
+      background: linear-gradient(135deg, #d3a410, #f3dd93);
+      color: #050509;
+      border-color: rgba(255, 255, 255, 0.18);
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-row.bot .msg-bubble {
+      background: rgba(7, 9, 16, 0.98);
+      border-color: rgba(255, 255, 255, 0.12);
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-meta {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .msg-row.user .msg-meta {
+      text-align: right;
+    }
+
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 4px 2px;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(211, 165, 16, 0.8);
+      animation: bounce 1s infinite;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    .chat-footer {
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .prompt-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(4, 6, 11, 0.96);
+      color: var(--text-main);
+      padding: 8px 12px;
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    .prompt-input::placeholder {
+      color: rgba(160, 163, 177, 0.7);
+    }
+
+    .send-btn {
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.6),
+        0 10px 26px rgba(0, 0, 0, 0.9);
+    }
+
+    .footer-meta {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        display: none;
+      }
+
+      .chat-shell {
+        height: calc(100vh - 150px);
+      }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      padding: 18px 0 22px;
+      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+    }
+
+    .footer-shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 30px rgba(211, 165, 16, 0.9),
+        0 0 70px rgba(0, 0, 0, 1);
+      margin-bottom: 8px;
+    }
+
+    .footer-credits {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer-credits span {
+      color: #f1e0a8;
+    }
+
+    .footer-links {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fbe6a6;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-shell" id="navShell">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">ErgoMatrix</div>
+          <div class="logo-text-sub">Posture Pro System</div>
+        </div>
+      </a>
+      <nav>
+        <a href="about.html">About & Future</a>
+        <a href="products.html">Products</a>
+        <a href="how-to-use.html">How To Use</a>
+        <a href="ai-chatbot.html">AI Posture Coach</a>
+        <a href="credits.html">Credits</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location.href='products.html'">
+        <span>Buy Posture Pro</span>
+        <span class="nav-cta-dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <header class="page-header">
+        <div class="page-pill">
+          <div class="page-pill-dot"></div>
+          <span>Local FAQ posture coach</span>
+        </div>
+        <h1 class="page-title">
+          Ask about <span>ErgoMatrix & posture</span>.
+        </h1>
+        <p class="page-subtitle">
+          This local bot answers common questions about ErgoMatrix, the Posture Pro system, Eye-Q Sensor,
+          Mesh-Up, and basic posture tips for desk workers.
+        </p>
+      </header>
+
+      <section class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-title">Suggested questions</div>
+          <div class="sidebar-chip">
+            <span class="sidebar-chip-dot"></span>
+            <span>All answers are hardcoded for this project only.</span>
+          </div>
+
+          <div>
+            <div class="sidebar-section-title">About ErgoMatrix</div>
+            <div class="example-list">
+              <button class="example-pill">
+                What is ErgoMatrix and what problem does it solve?
+              </button>
+              <button class="example-pill">
+                How is ErgoMatrix different from a normal ergonomic chair?
+              </button>
+              <button class="example-pill">
+                What is the future vision of ErgoMatrix?
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="sidebar-section-title">Products & usage</div>
+            <div class="example-list">
+              <button class="example-pill">
+                What is the Eye-Q Sensor and how does it work?
+              </button>
+              <button class="example-pill">
+                What is the Mesh-Up and how does it feel?
+              </button>
+              <button class="example-pill">
+                How do I set up the full Posture Pro system?
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="sidebar-section-title">Posture & pain</div>
+            <div class="example-list">
+              <button class="example-pill">
+                My lower back hurts while working. How can Posture Pro help?
+              </button>
+              <button class="example-pill">
+                What is a healthy distance from my screen?
+              </button>
+              <button class="example-pill">
+                What daily posture habits do you recommend for desk workers?
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="sidebar-section-title">Website & credits</div>
+            <div class="example-list">
+              <button class="example-pill">
+                Who created this website and this AI?
+              </button>
+              <button class="example-pill">
+                What pages does the ErgoMatrix website have?
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Chat -->
+        <section class="chat-shell">
+          <div class="chat-header">
+            <div class="chat-badge">
+              <div class="chat-avatar"></div>
+              <div class="chat-meta">
+                <div class="chat-meta-title">ErgoMatrix Local Coach</div>
+                <div class="chat-meta-sub">FAQ bot for posture & product</div>
+              </div>
+            </div>
+            <div class="chat-controls">
+              <button class="chat-control-btn" id="clearChat">Clear</button>
+            </div>
+          </div>
+
+          <div class="chat-body" id="chatBody">
+            <div class="msg-row bot">
+              <div class="msg-avatar"></div>
+              <div>
+                <div class="msg-bubble">
+                  Hi! I am the local ErgoMatrix FAQ coach. Ask me about ErgoMatrix, the Eye-Q Sensor, Mesh-Up,
+                  Posture Pro, posture tips, or this website.
+                </div>
+                <div class="msg-meta">AI · Local Q&A only</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="typing-indicator" id="typingIndicator">
+            <span>Coach is thinking</span>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <footer class="chat-footer">
+            <div class="input-row">
+              <input
+                type="text"
+                id="promptInput"
+                class="prompt-input"
+                placeholder="Type a question about ErgoMatrix, posture, or this website..."
+              />
+              <button class="send-btn" id="sendBtn">Send</button>
+            </div>
+            <div class="footer-meta">
+              <span>Only project-specific questions are supported.</span>
+              <span>No external API; all answers are predefined.</span>
+            </div>
+          </footer>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-shell">
+      <div class="footer-name">ErgoMatrix</div>
+      <div class="footer-credits">
+        Website by <span>Tanuj Sharma</span> & <span>Sparsh Jain</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="credits.html">Credits</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    const navShell = document.getElementById("navShell");
+    window.addEventListener("scroll", () => {
+      if (!navShell) return;
+      if (window.scrollY > 20) {
+        navShell.classList.add("scrolled");
+      } else {
+        navShell.classList.remove("scrolled");
+      }
+    });
+
+    const chatBody = document.getElementById("chatBody");
+    const typingIndicator = document.getElementById("typingIndicator");
+    const promptInput = document.getElementById("promptInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const clearBtn = document.getElementById("clearChat");
+    const exampleButtons = document.querySelectorAll(".example-pill");
+
+    // Hardcoded Q&A knowledge base (very simple keyword/intent matching)
+    const knowledgeBase = [
+      {
+        keywords: ["what is ergomatrix", "about ergomatrix", "what problem"],
+        answer:
+          "ErgoMatrix is a posture-focused health tech company that pairs the Eye-Q Sensor and Mesh-Up chair cover to actively correct your posture at the desk. It helps prevent chronic pain, fatigue, and spinal strain caused by long hours of sitting."
+      },
+      {
+        keywords: ["different from a normal ergonomic chair", "different from normal chair", "how is ergomatrix different"],
+        answer:
+          "Traditional ergonomic chairs mostly support you passively. ErgoMatrix adds active sensing with the Eye-Q Sensor and haptic feedback through Mesh-Up, creating a real-time feedback loop that gently nudges you whenever your posture collapses."
+      },
+      {
+        keywords: ["future vision", "future of ergomatrix", "vision of ergomatrix", "our future"],
+        answer:
+          "The future vision of ErgoMatrix is to become both a SaaS posture analytics platform for companies and a technology layer built into smart furniture. That means posture dashboards for teams and ErgoMatrix intelligence inside future chairs and desks."
+      },
+      {
+        keywords: ["what is the eye-q", "eye q sensor", "eye-q sensor", "how does eye-q work"],
+        answer:
+          "The Eye-Q Sensor is a compact desk sensor that sits beside your screen and measures the distance between your head and the display. When you lean too close or slump away from your calibrated position, it detects that change and triggers Mesh-Up to alert you."
+      },
+      {
+        keywords: ["what is the mesh-up", "mesh up", "mesh-up chair cover", "how does mesh-up feel"],
+        answer:
+          "Mesh-Up is a universal mesh cover that wraps around your office chair and places haptic modules near your lower back. When your posture drifts, it sends a gentle, brief vibration to remind you to sit upright without being harsh or distracting."
+      },
+      {
+        keywords: ["posture pro system", "full posture pro", "eye-q and mesh-up together", "bundle"],
+        answer:
+          "The Posture Pro system combines the Eye-Q Sensor and Mesh-Up. Eye-Q tracks how you sit relative to the screen, and Mesh-Up turns posture problems into soft vibrations in your lower back, giving you a complete feedback loop while you work."
+      },
+      {
+        keywords: ["set up the full posture pro", "how do i set up posture pro", "setup posture pro"],
+        answer:
+          "To set up Posture Pro, first place the Eye-Q Sensor near your screen with a clear view of your head. Then attach Mesh-Up so the lower vibration area sits at your lumbar curve. Finally, use the software or guide on the How To Use page to calibrate your healthy sitting distance."
+      },
+      {
+        keywords: ["my lower back hurts", "lower back pain", "back hurts while working"],
+        answer:
+          "For lower back pain at the desk, use Mesh-Up so its vibration zone sits right at your lumbar curve and respond to each cue by stacking your head over your shoulders and hips. Combine that with short movement breaks every 45–60 minutes and a chair height that lets your feet rest flat on the floor."
+      },
+      {
+        keywords: ["healthy distance from my screen", "how far should my eyes be", "screen distance", "distance from monitor"],
+        answer:
+          "A common healthy range is roughly an arm’s length from your screen, often around 50–70cm for most setups. Eye-Q helps keep you in that comfort zone by detecting when you lean in or drift too far and using Mesh-Up to bring your posture back."
+      },
+      {
+        keywords: ["daily posture habits", "habits do you recommend", "posture habits", "daily posture tips"],
+        answer:
+          "Good daily habits include keeping elbows near 90°, top of your screen at about eye level, feet flat on the floor, and taking short movement breaks every hour. Posture Pro adds micro-corrections by vibrating whenever it senses a slump so you can reset quickly."
+      },
+      {
+        keywords: ["who created this website", "who made this website", "who made you", "who created you"],
+        answer:
+          "Tanuj Sharma and Sparsh Jain created me and this website."
+      },
+      {
+        keywords: ["what pages does the ergomatrix website have", "site map", "what pages are there"],
+        answer:
+          "The ErgoMatrix website includes: a Home page, an About & Future page, a Products page, a How To Use page, this AI Posture Coach page, and a Credits page that highlights the creators and tech stack."
+      },
+      {
+        keywords: ["what is posture pro", "posture pro"],
+        answer:
+          "Posture Pro is the name of the full ErgoMatrix system: the Eye-Q Sensor plus Mesh-Up chair cover working together to sense posture and give real-time feedback."
+      },
+      {
+        keywords: ["what is this project about", "what is this project", "what is this website about"],
+        answer:
+          "This project is a concept site for ErgoMatrix, a posture-driven health technology product. The website showcases the company story, products, setup instructions, a local FAQ chatbot, and credits for the creators."
+      }
+    ];
+
+    function addMessage(role, text) {
+      const row = document.createElement("div");
+      row.classList.add("msg-row", role === "user" ? "user" : "bot");
+
+      const avatar = document.createElement("div");
+      avatar.classList.add("msg-avatar");
+
+      const contentWrap = document.createElement("div");
+      const bubble = document.createElement("div");
+      bubble.classList.add("msg-bubble");
+      bubble.textContent = text;
+
+      const meta = document.createElement("div");
+      meta.classList.add("msg-meta");
+      meta.textContent = role === "user" ? "You" : "Local coach";
+
+      contentWrap.appendChild(bubble);
+      contentWrap.appendChild(meta);
+
+      if (role === "user") {
+        row.appendChild(contentWrap);
+        row.appendChild(avatar);
+      } else {
+        row.appendChild(avatar);
+        row.appendChild(contentWrap);
+      }
+
+      chatBody.appendChild(row);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function findAnswer(question) {
+      const lower = question.toLowerCase();
+
+      // Check knowledge base
+      for (const item of knowledgeBase) {
+        if (item.keywords.some(k => lower.includes(k))) {
+          return item.answer;
+        }
+      }
+
+      // Fallback if out of domain
+      return "I can only help with ErgoMatrix, the Posture Pro system, Eye-Q Sensor, Mesh-Up, posture tips for desk workers, and this website.";
+    }
+
+    async function sendMessage() {
+      const text = promptInput.value.trim();
+      if (!text) return;
+
+      addMessage("user", text);
+      promptInput.value = "";
+      typingIndicator.style.display = "flex";
+
+      // Simulate thinking delay
+      await new Promise(r => setTimeout(r, 500));
+
+      const reply = findAnswer(text);
+      typingIndicator.style.display = "none";
+      addMessage("bot", reply);
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    promptInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      chatBody.innerHTML = "";
+      addMessage(
+        "bot",
+        "Chat cleared. Ask me anything about ErgoMatrix, Posture Pro, Eye-Q, Mesh-Up, posture tips, or this website."
+      );
+    });
+
+    exampleButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        promptInput.value = btn.textContent.trim();
+        promptInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>
