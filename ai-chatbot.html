@@ -65,6 +65,7 @@
       display: flex;
       justify-content: center;
       padding: 16px 0;
+      pointer-events: none;
     }
 
     .nav-shell {
@@ -85,6 +86,7 @@
       backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
         border-color var(--transition-fast);
     }
@@ -206,6 +208,10 @@
       filter: brightness(1.03);
     }
 
+    .nav-cta span {
+      font-size: 0.9em;
+    }
+
     .nav-cta-dot {
       width: 8px;
       height: 8px;
@@ -225,7 +231,7 @@
       margin: 0 auto;
     }
 
-    /* Layout */
+    /* Layout - FIXED: semantic structure */
     .page-header {
       padding: 32px 0 16px;
       display: flex;
@@ -245,6 +251,7 @@
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      width: fit-content;
     }
 
     .page-pill-dot {
@@ -341,6 +348,7 @@
       gap: 6px;
     }
 
+    /* FIXED: Proper button styles with accessibility */
     .example-pill {
       font-size: 0.78rem;
       padding: 7px 10px;
@@ -348,11 +356,21 @@
       background: rgba(9, 12, 20, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
     }
 
     .example-pill:hover {
       border-color: rgba(211, 165, 16, 0.7);
       background: rgba(14, 14, 22, 0.98);
+      transform: translateX(2px);
+    }
+
+    .example-pill:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline-offset: 2px;
     }
 
     .sidebar-footer {
@@ -361,7 +379,7 @@
       margin-top: 6px;
     }
 
-    /* Chat container */
+    /* Chat container - FIXED: Added proper ARIA roles */
     .chat-shell {
       border-radius: var(--radius-lg);
       background: rgba(7, 9, 16, 0.98);
@@ -428,6 +446,8 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-muted);
+      font-family: inherit;
+      transition: border-color var(--transition-fast), color var(--transition-fast);
     }
 
     .chat-control-btn:hover {
@@ -435,6 +455,12 @@
       color: #fbe6a6;
     }
 
+    .chat-control-btn:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline-offset: 2px;
+    }
+
+    /* FIXED: Chat body as log with proper ARIA */
     .chat-body {
       flex: 1;
       padding: 12px 14px;
@@ -544,6 +570,15 @@
       align-items: center;
     }
 
+    /* FIXED: Added label for accessibility */
+    .sr-only {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     .prompt-input {
       flex: 1;
       border-radius: 999px;
@@ -553,10 +588,16 @@
       padding: 8px 12px;
       font-size: 0.84rem;
       outline: none;
+      font-family: inherit;
+      transition: border-color var(--transition-fast);
     }
 
     .prompt-input::placeholder {
       color: rgba(160, 163, 177, 0.7);
+    }
+
+    .prompt-input:focus {
+      border-color: rgba(211, 165, 16, 0.6);
     }
 
     .send-btn {
@@ -572,6 +613,18 @@
       box-shadow:
         0 0 18px rgba(211, 165, 16, 0.6),
         0 10px 26px rgba(0, 0, 0, 0.9);
+      font-family: inherit;
+      transition: transform var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .send-btn:hover {
+      transform: translateY(-1px) scale(1.02);
+      filter: brightness(1.05);
+    }
+
+    .send-btn:focus {
+      outline: 2px solid rgba(211, 165, 16, 0.8);
+      outline-offset: 2px;
     }
 
     .footer-meta {
@@ -683,7 +736,8 @@
 
   <main>
     <div class="shell">
-      <header class="page-header">
+      <!-- FIXED: Changed from <header> to <section> -->
+      <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
           <span>Local FAQ posture coach</span>
@@ -695,125 +749,129 @@
           This local bot answers common questions about ErgoMatrix, the Posture Pro system, Eye-Q Sensor,
           Mesh-Up, and basic posture tips for desk workers.
         </p>
-      </header>
+      </section>
 
       <section class="layout">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Suggested questions">
           <div class="sidebar-title">Suggested questions</div>
-          <div class="sidebar-chip">
-            <span class="sidebar-chip-dot"></span>
+          <div class="sidebar-chip" role="status">
+            <span class="sidebar-chip-dot" aria-hidden="true"></span>
             <span>All answers are hardcoded for this project only.</span>
           </div>
 
           <div>
-            <div class="sidebar-section-title">About ErgoMatrix</div>
+            <h3 class="sidebar-section-title">About ErgoMatrix</h3>
             <div class="example-list">
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What is ErgoMatrix and what problem does it solve?">
                 What is ErgoMatrix and what problem does it solve?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: How is ErgoMatrix different from a normal ergonomic chair?">
                 How is ErgoMatrix different from a normal ergonomic chair?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What is the future vision of ErgoMatrix?">
                 What is the future vision of ErgoMatrix?
               </button>
             </div>
           </div>
 
           <div>
-            <div class="sidebar-section-title">Products & usage</div>
+            <h3 class="sidebar-section-title">Products & usage</h3>
             <div class="example-list">
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What is the Eye-Q Sensor and how does it work?">
                 What is the Eye-Q Sensor and how does it work?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What is the Mesh-Up and how does it feel?">
                 What is the Mesh-Up and how does it feel?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: How do I set up the full Posture Pro system?">
                 How do I set up the full Posture Pro system?
               </button>
             </div>
           </div>
 
           <div>
-            <div class="sidebar-section-title">Posture & pain</div>
+            <h3 class="sidebar-section-title">Posture & pain</h3>
             <div class="example-list">
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: My lower back hurts while working. How can Posture Pro help?">
                 My lower back hurts while working. How can Posture Pro help?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What is a healthy distance from my screen?">
                 What is a healthy distance from my screen?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What daily posture habits do you recommend for desk workers?">
                 What daily posture habits do you recommend for desk workers?
               </button>
             </div>
           </div>
 
           <div>
-            <div class="sidebar-section-title">Website & credits</div>
+            <h3 class="sidebar-section-title">Website & credits</h3>
             <div class="example-list">
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: Who created this website and this AI?">
                 Who created this website and this AI?
               </button>
-              <button class="example-pill">
+              <button class="example-pill" aria-label="Ask: What pages does the ErgoMatrix website have?">
                 What pages does the ErgoMatrix website have?
               </button>
             </div>
           </div>
         </aside>
 
-        <!-- Chat -->
-        <section class="chat-shell">
+        <!-- Chat - FIXED: Added proper ARIA roles and structure -->
+        <section class="chat-shell" aria-label="Chat interface">
           <div class="chat-header">
             <div class="chat-badge">
-              <div class="chat-avatar"></div>
+              <div class="chat-avatar" aria-hidden="true"></div>
               <div class="chat-meta">
                 <div class="chat-meta-title">ErgoMatrix Local Coach</div>
                 <div class="chat-meta-sub">FAQ bot for posture & product</div>
               </div>
             </div>
             <div class="chat-controls">
-              <button class="chat-control-btn" id="clearChat">Clear</button>
+              <button class="chat-control-btn" id="clearChat" aria-label="Clear chat history">Clear</button>
             </div>
           </div>
 
-          <div class="chat-body" id="chatBody">
+          <!-- FIXED: Added role="log" and aria-live for chat messages -->
+          <div class="chat-body" id="chatBody" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions">
             <div class="msg-row bot">
-              <div class="msg-avatar"></div>
+              <div class="msg-avatar" aria-hidden="true"></div>
               <div>
                 <div class="msg-bubble">
                   Hi! I am the local ErgoMatrix FAQ coach. Ask me about ErgoMatrix, the Eye-Q Sensor, Mesh-Up,
                   Posture Pro, posture tips, or this website.
                 </div>
-                <div class="msg-meta">AI · Local Q&A only</div>
+                <div class="msg-meta" aria-label="Message from AI coach">AI · Local Q&A only</div>
               </div>
             </div>
           </div>
 
-          <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-indicator" id="typingIndicator" role="status" aria-live="polite" aria-label="Coach is thinking">
             <span>Coach is thinking</span>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <div class="dot" aria-hidden="true"></div>
+            <div class="dot" aria-hidden="true"></div>
+            <div class="dot" aria-hidden="true"></div>
           </div>
 
-          <footer class="chat-footer">
+          <div class="chat-footer">
             <div class="input-row">
+              <!-- FIXED: Added proper label for input -->
+              <label for="promptInput" class="sr-only">Type your question about ErgoMatrix or posture</label>
               <input
                 type="text"
                 id="promptInput"
                 class="prompt-input"
                 placeholder="Type a question about ErgoMatrix, posture, or this website..."
+                aria-describedby="inputHint"
               />
-              <button class="send-btn" id="sendBtn">Send</button>
+              <button class="send-btn" id="sendBtn" aria-label="Send message">Send</button>
             </div>
-            <div class="footer-meta">
+            <div class="footer-meta" id="inputHint">
               <span>Only project-specific questions are supported.</span>
               <span>No external API; all answers are predefined.</span>
             </div>
-          </footer>
+          </div>
         </section>
       </section>
     </div>
@@ -897,7 +955,7 @@
       {
         keywords: ["healthy distance from my screen", "how far should my eyes be", "screen distance", "distance from monitor"],
         answer:
-          "A common healthy range is roughly an arm’s length from your screen, often around 50–70cm for most setups. Eye-Q helps keep you in that comfort zone by detecting when you lean in or drift too far and using Mesh-Up to bring your posture back."
+          "A common healthy range is roughly an arm's length from your screen, often around 50–70cm for most setups. Eye-Q helps keep you in that comfort zone by detecting when you lean in or drift too far and using Mesh-Up to bring your posture back."
       },
       {
         keywords: ["daily posture habits", "habits do you recommend", "posture habits", "daily posture tips"],
@@ -926,12 +984,16 @@
       }
     ];
 
+    // FIXED: Improved message addition with better accessibility
     function addMessage(role, text) {
       const row = document.createElement("div");
       row.classList.add("msg-row", role === "user" ? "user" : "bot");
+      row.setAttribute("role", "article");
+      row.setAttribute("aria-label", `Message from ${role === "user" ? "you" : "AI coach"}`);
 
       const avatar = document.createElement("div");
       avatar.classList.add("msg-avatar");
+      avatar.setAttribute("aria-hidden", "true");
 
       const contentWrap = document.createElement("div");
       const bubble = document.createElement("div");
@@ -941,6 +1003,7 @@
       const meta = document.createElement("div");
       meta.classList.add("msg-meta");
       meta.textContent = role === "user" ? "You" : "Local coach";
+      meta.setAttribute("aria-label", `Sender: ${role === "user" ? "You" : "AI Local coach"}`);
 
       contentWrap.appendChild(bubble);
       contentWrap.appendChild(meta);
@@ -977,7 +1040,10 @@
 
       addMessage("user", text);
       promptInput.value = "";
+      
+      // Show typing indicator
       typingIndicator.style.display = "flex";
+      typingIndicator.setAttribute("aria-label", "Coach is thinking about your question");
 
       // Simulate thinking delay
       await new Promise(r => setTimeout(r, 500));
@@ -1003,10 +1069,20 @@
       );
     });
 
+    // FIXED: Better keyboard navigation for example buttons
     exampleButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         promptInput.value = btn.textContent.trim();
         promptInput.focus();
+      });
+      
+      // Allow Enter key to activate
+      btn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          promptInput.value = btn.textContent.trim();
+          promptInput.focus();
+        }
       });
     });
   </script>
