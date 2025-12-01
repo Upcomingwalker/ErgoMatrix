@@ -206,6 +206,10 @@
       filter: brightness(1.03);
     }
 
+    .nav-cta span {
+      font-size: 0.9em;
+    }
+
     .nav-cta-dot {
       width: 8px;
       height: 8px;
@@ -225,7 +229,7 @@
       margin: 0 auto;
     }
 
-    /* Page header */
+    /* Page header - FIXED: Changed from <header> to semantic section */
     .page-header {
       padding: 40px 0 24px;
       display: flex;
@@ -245,6 +249,7 @@
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      width: fit-content;
     }
 
     .page-pill-dot {
@@ -393,6 +398,8 @@
       padding: 16px 16px 18px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
       overflow: hidden;
+      /* FIXED: Added transition for smooth hover effect */
+      transition: transform var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med);
     }
 
     .future-card::before {
@@ -413,6 +420,9 @@
     .future-card:hover {
       border-color: rgba(211, 165, 16, 0.6);
       transform: translateY(-4px);
+      box-shadow: 
+        0 18px 50px rgba(0, 0, 0, 0.95),
+        0 0 30px rgba(211, 165, 16, 0.2);
     }
 
     .future-label {
@@ -585,7 +595,8 @@
 
   <main>
     <div class="shell">
-      <header class="page-header">
+      <!-- FIXED: Changed from <header> to <section> for proper semantic structure -->
+      <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
           <span>About ErgoMatrix</span>
@@ -597,7 +608,7 @@
           ErgoMatrix is on a mission to rescue millions of desk workers from chronic pain and
           preventable spinal damage by turning every ordinary chair into an intelligent posture trainer.
         </p>
-      </header>
+      </section>
 
       <section class="grid-two">
         <article class="card">
@@ -655,7 +666,7 @@
 
       <section class="future-section" id="future">
         <div class="future-header">
-          <div class="future-title">Our future</div>
+          <h2 class="future-title">Our future</h2>
           <div class="future-kicker">From product to platform and ecosystem</div>
         </div>
         <div class="future-grid">
@@ -693,7 +704,7 @@
             <div class="future-label">Ergonomics tech integration</div>
             <h3 class="future-heading">Inside the next-generation office</h3>
             <p class="future-body">
-              Our sensor and haptic IP is built to be embedded directly into tomorrow’s smart chairs,
+              Our sensor and haptic IP is built to be embedded directly into tomorrow's smart chairs,
               desks, and workstations. By partnering with premium furniture brands, we envision
               ErgoMatrix intelligence reaching every workstation, everywhere.
             </p>
@@ -706,7 +717,7 @@
         </div>
       </section>
 
-      <section class="stats-section">
+      <section class="stats-section" aria-label="Company milestones">
         <article class="stat-card">
           <div class="stat-label">Today</div>
           <div class="stat-value">Prototype ready</div>
