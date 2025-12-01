@@ -256,44 +256,75 @@
       color: var(--text-muted);
     }
 
-    /* From Uiverse.io by Juanes200122 */
+    /* Loader SVG animations with unique IDs */
     .loader-container svg {
       width: 120px;
       height: 120px;
     }
 
-    .container {
-      background-color: #414141;
-    }
-    @keyframes bounce {
+    @keyframes loader-bounce {
       0%, 100% { translate: 0px 36px; }
       50% { translate: 0px 46px; }
     }
-    @keyframes bounce2 {
+    @keyframes loader-bounce2 {
       0%, 100% { translate: 0px 46px; }
       50% { translate: 0px 56px; }
     }
-    @keyframes umbral {
+    @keyframes loader-umbral {
       0% { stop-color: #d3a5102e; }
       50% { stop-color: rgba(211, 165, 16, 0.519); }
       100% { stop-color: #d3a5102e; }
     }
-    @keyframes partciles {
+    @keyframes loader-particles {
       0%, 100% { translate: 0px 16px; }
       50% { translate: 0px 6px; }
     }
-    #particles {
-      animation: partciles 4s ease-in-out infinite;
+    #loader-particles-1, #loader-particles-2, #loader-particles-3 {
+      animation: loader-particles 4s ease-in-out infinite;
     }
-    #animatedStop {
-      animation: umbral 4s infinite;
+    #loader-animatedStop, #loader-animatedStop2 {
+      animation: loader-umbral 4s infinite;
     }
-    #bounce {
-      animation: bounce 4s ease-in-out infinite;
+    #loader-bounce {
+      animation: loader-bounce 4s ease-in-out infinite;
       translate: 0px 36px;
     }
-    #bounce2 {
-      animation: bounce2 4s ease-in-out infinite;
+    #loader-bounce2 {
+      animation: loader-bounce2 4s ease-in-out infinite;
+      translate: 0px 46px;
+      animation-delay: 0.5s;
+    }
+
+    /* Hero SVG animations with unique IDs */
+    @keyframes hero-bounce {
+      0%, 100% { translate: 0px 36px; }
+      50% { translate: 0px 46px; }
+    }
+    @keyframes hero-bounce2 {
+      0%, 100% { translate: 0px 46px; }
+      50% { translate: 0px 56px; }
+    }
+    @keyframes hero-umbral {
+      0% { stop-color: #d3a5102e; }
+      50% { stop-color: rgba(211, 165, 16, 0.519); }
+      100% { stop-color: #d3a5102e; }
+    }
+    @keyframes hero-particles {
+      0%, 100% { translate: 0px 16px; }
+      50% { translate: 0px 6px; }
+    }
+    #hero-particles-1, #hero-particles-2, #hero-particles-3 {
+      animation: hero-particles 4s ease-in-out infinite;
+    }
+    #hero-animatedStop, #hero-animatedStop2 {
+      animation: hero-umbral 4s infinite;
+    }
+    #hero-bounce {
+      animation: hero-bounce 4s ease-in-out infinite;
+      translate: 0px 36px;
+    }
+    #hero-bounce2 {
+      animation: hero-bounce2 4s ease-in-out infinite;
       translate: 0px 46px;
       animation-delay: 0.5s;
     }
@@ -821,7 +852,7 @@
   <!-- Loader -->
   <div class="loader-overlay" id="loaderOverlay">
     <div class="loader-container">
-      <!-- Your SVG loader -->
+      <!-- Loader SVG with unique IDs (loader- prefix) -->
       <svg xmlns="http://www.w3.org/2000/svg" height="200" width="200">
         <g style="order: -1;">
           <polygon
@@ -830,7 +861,7 @@
             stroke="#d3a410"
             fill="none"
             points="70,70 148,50 130,130 50,150"
-            id="bounce"
+            id="loader-bounce"
           ></polygon>
           <polygon
             transform="rotate(45 100 100)"
@@ -838,7 +869,7 @@
             stroke="#d3a410"
             fill="none"
             points="70,70 148,50 130,130 50,150"
-            id="bounce2"
+            id="loader-bounce2"
           ></polygon>
           <polygon
             transform="rotate(45 100 100)"
@@ -850,11 +881,11 @@
           <polygon
             stroke-width="2"
             stroke=""
-            fill="url(#gradiente)"
+            fill="url(#loader-gradiente)"
             points="100,70 150,100 100,130 50,100"
           ></polygon>
           <defs>
-            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente">
+            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="loader-gradiente">
               <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
               <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
             </linearGradient>
@@ -870,16 +901,16 @@
             transform="translate(20, 31)"
             stroke-width="2"
             stroke=""
-            fill="url(#gradiente2)"
+            fill="url(#loader-gradiente2)"
             points="40,-40 80,-40 80,99 40,75"
           ></polygon>
           <defs>
-            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="gradiente2">
+            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="loader-gradiente2">
               <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
               <stop
                 style="stop-color:#d3a51054;stop-opacity:1"
                 offset="100%"
-                id="animatedStop"
+                id="loader-animatedStop"
               ></stop>
             </linearGradient>
           </defs>
@@ -894,16 +925,16 @@
             transform="rotate(0 100 100) translate(60, 20)"
             stroke-width="2"
             stroke=""
-            fill="url(#gradiente3)"
+            fill="url(#loader-gradiente3)"
             points="40,-40 80,-40 80,85 40,110.2"
           ></polygon>
           <defs>
-            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente3">
+            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="loader-gradiente3">
               <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
               <stop
                 style="stop-color:#d3a51054;stop-opacity:1"
                 offset="100%"
-                id="animatedStop"
+                id="loader-animatedStop2"
               ></stop>
             </linearGradient>
           </defs>
@@ -913,7 +944,7 @@
             stroke=""
             fill="#ffe4a1"
             points="5,0 5,5 0,5 0,0"
-            id="particles"
+            id="loader-particles-1"
           ></polygon>
           <polygon
             transform="rotate(45 100 100) translate(80, 55)"
@@ -921,7 +952,7 @@
             stroke=""
             fill="#ccb069"
             points="6,0 6,6 0,6 0,0"
-            id="particles"
+            id="loader-particles-2"
           ></polygon>
           <polygon
             transform="rotate(45 100 100) translate(70, 80)"
@@ -929,7 +960,7 @@
             stroke=""
             fill="#fff"
             points="2,0 2,2 0,2 0,0"
-            id="particles"
+            id="loader-particles-3"
           ></polygon>
           <polygon
             stroke-width="2"
@@ -1026,7 +1057,7 @@
                 <div class="hero-card-visual">
                   <div class="hero-card-visual-inner">
                     <div class="tag-pill">Real-time posture loop</div>
-                    <!-- Re-use loader as a hologram-like visual -->
+                    <!-- Hero SVG with unique IDs (hero- prefix) -->
                     <div style="display:flex;align-items:center;justify-content:center;padding-top:28px;padding-bottom:12px;">
                       <svg xmlns="http://www.w3.org/2000/svg" height="160" width="160">
                         <g style="order: -1;">
@@ -1036,7 +1067,7 @@
                             stroke="#d3a410"
                             fill="none"
                             points="70,70 148,50 130,130 50,150"
-                            id="bounce"
+                            id="hero-bounce"
                           ></polygon>
                           <polygon
                             transform="rotate(45 100 100)"
@@ -1044,7 +1075,7 @@
                             stroke="#d3a410"
                             fill="none"
                             points="70,70 148,50 130,130 50,150"
-                            id="bounce2"
+                            id="hero-bounce2"
                           ></polygon>
                           <polygon
                             transform="rotate(45 100 100)"
@@ -1056,11 +1087,11 @@
                           <polygon
                             stroke-width="2"
                             stroke=""
-                            fill="url(#gradiente)"
+                            fill="url(#hero-gradiente)"
                             points="100,70 150,100 100,130 50,100"
                           ></polygon>
                           <defs>
-                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente">
+                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="hero-gradiente">
                               <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
                               <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
                             </linearGradient>
@@ -1076,16 +1107,16 @@
                             transform="translate(20, 31)"
                             stroke-width="2"
                             stroke=""
-                            fill="url(#gradiente2)"
+                            fill="url(#hero-gradiente2)"
                             points="40,-40 80,-40 80,99 40,75"
                           ></polygon>
                           <defs>
-                            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="gradiente2">
+                            <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="hero-gradiente2">
                               <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
                               <stop
                                 style="stop-color:#d3a51054;stop-opacity:1"
                                 offset="100%"
-                                id="animatedStop"
+                                id="hero-animatedStop"
                               ></stop>
                             </linearGradient>
                           </defs>
@@ -1100,16 +1131,16 @@
                             transform="rotate(0 100 100) translate(60, 20)"
                             stroke-width="2"
                             stroke=""
-                            fill="url(#gradiente3)"
+                            fill="url(#hero-gradiente3)"
                             points="40,-40 80,-40 80,85 40,110.2"
                           ></polygon>
                           <defs>
-                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="gradiente3">
+                            <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="hero-gradiente3">
                               <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
                               <stop
                                 style="stop-color:#d3a51054;stop-opacity:1"
                                 offset="100%"
-                                id="animatedStop"
+                                id="hero-animatedStop2"
                               ></stop>
                             </linearGradient>
                           </defs>
@@ -1119,7 +1150,7 @@
                             stroke=""
                             fill="#ffe4a1"
                             points="5,0 5,5 0,5 0,0"
-                            id="particles"
+                            id="hero-particles-1"
                           ></polygon>
                           <polygon
                             transform="rotate(45 100 100) translate(80, 55)"
@@ -1127,7 +1158,7 @@
                             stroke=""
                             fill="#ccb069"
                             points="6,0 6,6 0,6 0,0"
-                            id="particles"
+                            id="hero-particles-2"
                           ></polygon>
                           <polygon
                             transform="rotate(45 100 100) translate(70, 80)"
@@ -1135,7 +1166,7 @@
                             stroke=""
                             fill="#fff"
                             points="2,0 2,2 0,2 0,0"
-                            id="particles"
+                            id="hero-particles-3"
                           ></polygon>
                           <polygon
                             stroke-width="2"
