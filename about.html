@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ErgoMatrix | About & Future</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-main: #05070b;
+      --bg-elevated: #111319;
+      --accent: #d3a410;
+      --accent-soft: #d3a51054;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a3b1;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --glass: rgba(7, 9, 15, 0.84);
+      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.3s ease-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      color: var(--text-main);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
+      opacity: 0.85;
+      z-index: -1;
+    }
+
+    /* Floating header (same as index) */
+    header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+      pointer-events: none;
+    }
+
+    .nav-shell {
+      width: min(1180px, 100% - 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.18),
+          rgba(8, 11, 20, 0.95),
+          rgba(112, 82, 255, 0.16)
+        );
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      pointer-events: auto;
+      transition: transform var(--transition-med), background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .nav-shell.scrolled {
+      transform: translateY(-6px) scale(0.98);
+      background: linear-gradient(
+          135deg,
+          rgba(211, 165, 16, 0.16),
+          rgba(5, 7, 13, 0.96),
+          rgba(64, 51, 178, 0.26)
+        );
+      border-color: rgba(211, 165, 16, 0.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(211, 165, 16, 0.7);
+      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+      box-shadow:
+        0 0 18px rgba(211, 165, 16, 0.7),
+        0 0 40px rgba(64, 51, 178, 0.6);
+    }
+
+    .logo-text-main {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.82rem;
+    }
+
+    nav a {
+      position: relative;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 3px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0;
+      transform: scaleX(0.25);
+      transform-origin: center;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+
+    nav a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      margin-left: 4px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
+        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
+      color: #050509;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 20px rgba(211, 165, 16, 0.5),
+        0 12px 32px rgba(0, 0, 0, 0.9);
+      transform-origin: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 30px rgba(211, 165, 16, 0.8),
+        0 16px 40px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.03);
+    }
+
+    .nav-cta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #161001;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    }
+
+    main {
+      min-height: 100vh;
+      padding-top: 96px;
+      padding-bottom: 80px;
+    }
+
+    .shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: 40px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .page-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(211, 165, 16, 0.55);
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .page-pill-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      box-shadow:
+        0 0 14px rgba(211, 165, 16, 0.8),
+        0 0 26px rgba(120, 82, 255, 0.7);
+    }
+
+    .page-title {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .page-title span {
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* Grid layout */
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 16, 0.96);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      padding: 18px 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.2), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(120, 82, 255, 0.25), transparent 55%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+    }
+
+    .card-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card-heading {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .list {
+      margin-top: 10px;
+      list-style: none;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .list li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .list-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(211, 165, 16, 0.8);
+      box-shadow: 0 0 12px rgba(211, 165, 16, 0.8);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* Future roadmap */
+    .future-section {
+      margin-top: 26px;
+    }
+
+    .future-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .future-title {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+
+    .future-kicker {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .future-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      background: rgba(6, 8, 14, 0.98);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .future-card::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med), transform var(--transition-med);
+      transform: translate3d(-10%, -10%, 0);
+    }
+
+    .future-card:hover::before {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .future-card:hover {
+      border-color: rgba(211, 165, 16, 0.6);
+      transform: translateY(-4px);
+    }
+
+    .future-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 6px;
+    }
+
+    .future-heading {
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+
+    .future-body {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .future-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .future-tag {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      background: rgba(5, 7, 11, 0.95);
+    }
+
+    /* Stats */
+    .stats-section {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      border-radius: var(--radius-md);
+      background: rgba(7, 9, 16, 0.98);
+      border: 1px solid var(--border-soft);
+      padding: 12px 14px 14px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+      color: #fbe6a6;
+    }
+
+    .stat-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      padding: 18px 0 22px;
+      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+    }
+
+    .footer-shell {
+      width: min(1180px, 100% - 32px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 30px rgba(211, 165, 16, 0.9),
+        0 0 70px rgba(0, 0, 0, 1);
+      margin-bottom: 8px;
+    }
+
+    .footer-credits {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer-credits span {
+      color: #f1e0a8;
+    }
+
+    .footer-links {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fbe6a6;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-shell" id="navShell">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">ErgoMatrix</div>
+          <div class="logo-text-sub">Posture Pro System</div>
+        </div>
+      </a>
+      <nav>
+        <a href="about.html">About & Future</a>
+        <a href="products.html">Products</a>
+        <a href="how-to-use.html">How To Use</a>
+        <a href="ai-chatbot.html">AI Posture Coach</a>
+        <a href="credits.html">Credits</a>
+      </nav>
+      <button class="nav-cta" onclick="window.location.href='products.html'">
+        <span>Buy Posture Pro</span>
+        <span class="nav-cta-dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <header class="page-header">
+        <div class="page-pill">
+          <div class="page-pill-dot"></div>
+          <span>About ErgoMatrix</span>
+        </div>
+        <h1 class="page-title">
+          Built for the <span>future of work</span>.
+        </h1>
+        <p class="page-subtitle">
+          ErgoMatrix is on a mission to rescue millions of desk workers from chronic pain and
+          preventable spinal damage by turning every ordinary chair into an intelligent posture trainer.
+        </p>
+      </header>
+
+      <section class="grid-two">
+        <article class="card">
+          <div class="card-inner">
+            <div class="card-kicker">Our origin story</div>
+            <h2 class="card-heading">Born from the realities of desk work</h2>
+            <p class="card-body">
+              ErgoMatrix was founded by a team that has watched long hours at a desk silently erode
+              health, focus, and confidence. Instead of another cushion or static chair, we designed
+              an active system that senses posture in real time and responds with gentle, corrective cues.
+            </p>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>Eye-Q Sensor measures your true head-to-screen distance with precision optics.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Mesh-Up translates bad posture into soft, localized haptics that guide you upright.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>The result is a full feedback loop that gradually retrains how you sit every day.</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <aside class="card">
+          <div class="card-inner">
+            <div class="card-kicker">What makes us different</div>
+            <h2 class="card-heading">Not just ergonomic furniture</h2>
+            <p class="card-body">
+              Most ergonomic solutions cushion the problem; ErgoMatrix actively intervenes. By combining
+              sensing, haptics, and data, Posture Pro behaves more like a coach than a chair, nudging
+              you into better form before strain builds.
+            </p>
+            <ul class="list">
+              <li>
+                <span class="list-bullet"></span>
+                <span>Transforms any compatible office chair into a smart ergonomic trainer.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Helps reduce chronic pain risk while protecting deep focus and energy.</span>
+              </li>
+              <li>
+                <span class="list-bullet"></span>
+                <span>Designed for coders, creatives, founders, and teams who live at a desk.</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="future-section" id="future">
+        <div class="future-header">
+          <div class="future-title">Our future</div>
+          <div class="future-kicker">From product to platform and ecosystem</div>
+        </div>
+        <div class="future-grid">
+          <article class="future-card">
+            <div class="future-label">SaaS & data authority</div>
+            <h3 class="future-heading">Wellness intelligence for companies</h3>
+            <p class="future-body">
+              Every deployed Posture Pro system creates anonymized behavioral signals—how people sit,
+              when fatigue spikes, when posture collapses. Our goal is to turn these signals into live
+              wellness dashboards that help employers protect their teams.
+            </p>
+            <div class="future-tag-row">
+              <span class="future-tag">Wellness analytics</span>
+              <span class="future-tag">Posture risk heatmaps</span>
+              <span class="future-tag">Ergonomic interventions</span>
+            </div>
+          </article>
+
+          <article class="future-card">
+            <div class="future-label">Health ecosystem</div>
+            <h3 class="future-heading">Wearables and bio-signals</h3>
+            <p class="future-body">
+              Posture is only one piece of the story. By syncing with smartwatches and wearables,
+              ErgoMatrix aims to correlate posture patterns with heart rate, stress markers, and sleep
+              quality to flag early risk and support better daily habits.
+            </p>
+            <div class="future-tag-row">
+              <span class="future-tag">Wearable sync</span>
+              <span class="future-tag">Stress & fatigue</span>
+              <span class="future-tag">Early warnings</span>
+            </div>
+          </article>
+
+          <article class="future-card">
+            <div class="future-label">Ergonomics tech integration</div>
+            <h3 class="future-heading">Inside the next-generation office</h3>
+            <p class="future-body">
+              Our sensor and haptic IP is built to be embedded directly into tomorrow’s smart chairs,
+              desks, and workstations. By partnering with premium furniture brands, we envision
+              ErgoMatrix intelligence reaching every workstation, everywhere.
+            </p>
+            <div class="future-tag-row">
+              <span class="future-tag">Smart furniture</span>
+              <span class="future-tag">Licensing</span>
+              <span class="future-tag">Scalable impact</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="stats-section">
+        <article class="stat-card">
+          <div class="stat-label">Today</div>
+          <div class="stat-value">Prototype ready</div>
+          <div class="stat-sub">
+            Eye-Q Sensor and Mesh-Up are functional and ready for real-world pilots with teams and workspaces.
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Near term</div>
+          <div class="stat-value">SaaS in dev</div>
+          <div class="stat-sub">
+            Building dashboards, posture scoring, and wellness alerts for companies that want proactive ergonomics.
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Long term</div>
+          <div class="stat-value">Global fabric</div>
+          <div class="stat-sub">
+            Embedding ErgoMatrix intelligence into furniture and devices so posture-aware work becomes the default.
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-shell">
+      <div class="footer-name">ErgoMatrix</div>
+      <div class="footer-credits">
+        Website by <span>Tanuj Sharma</span> & <span>Sparsh Jain</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="credits.html">Credits</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    const navShell = document.getElementById("navShell");
+    window.addEventListener("scroll", () => {
+      if (!navShell) return;
+      if (window.scrollY > 20) {
+        navShell.classList.add("scrolled");
+      } else {
+        navShell.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>
