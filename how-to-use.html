@@ -14,15 +14,15 @@
 
   <style>
     :root {
-      --bg-main: #05070b;
-      --bg-elevated: #111319;
-      --accent: #d3a410;
-      --accent-soft: #d3a51054;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a3b1;
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --glass: rgba(7, 9, 15, 0.84);
-      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --bg-main: #f1f3f8;
+      --bg-elevated: #ffffff;
+      --accent: #6f94c7;
+      --accent-soft: #add8e6;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: rgba(15, 23, 42, 0.08);
+      --glass: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.12);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-pill: 999px;
@@ -39,7 +39,7 @@
     html, body {
       height: 100%;
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      background: radial-gradient(circle at top, #ffffff 0, #f1f3f8 45%, #e2e8f0 100%);
       color: var(--text-main);
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
@@ -51,9 +51,9 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
-      opacity: 0.85;
+        radial-gradient(circle at 10% 0%, rgba(173, 216, 230, 0.26), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(111, 148, 199, 0.24), transparent 55%);
+      opacity: 0.9;
       z-index: -1;
     }
 
@@ -80,27 +80,28 @@
       border-radius: var(--radius-pill);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.18),
-          rgba(8, 11, 20, 0.95),
-          rgba(112, 82, 255, 0.16)
+          rgba(173, 216, 230, 0.55),
+          rgba(255, 255, 255, 0.96),
+          rgba(111, 148, 199, 0.16)
         );
       backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
       pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
-        border-color var(--transition-fast);
+        border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-shell.scrolled {
       transform: translateY(-6px) scale(0.98);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.16),
-          rgba(5, 7, 13, 0.96),
-          rgba(64, 51, 178, 0.26)
+          rgba(173, 216, 230, 0.28),
+          rgba(241, 243, 248, 0.98),
+          rgba(111, 148, 199, 0.18)
         );
-      border-color: rgba(211, 165, 16, 0.38);
+      border-color: rgba(111, 148, 199, 0.7);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
     }
 
     .logo {
@@ -111,15 +112,14 @@
       color: var(--text-main);
     }
 
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 12px;
-      border: 1px solid rgba(211, 165, 16, 0.7);
-      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      object-fit: cover;
       box-shadow:
-        0 0 18px rgba(211, 165, 16, 0.7),
-        0 0 40px rgba(64, 51, 178, 0.6);
+        0 0 12px rgba(173, 216, 230, 0.9),
+        0 0 22px rgba(111, 148, 199, 0.7);
     }
 
     .logo-text-main {
@@ -168,8 +168,8 @@
     }
 
     nav a:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.02);
+      color: #0f172a;
+      background: rgba(148, 163, 184, 0.08);
       transform: translateY(-1px);
     }
 
@@ -182,9 +182,9 @@
       margin-left: 4px;
       padding: 8px 16px;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
-        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: radial-gradient(circle at 0 0, rgba(241, 243, 248, 0.9), transparent 55%),
+        linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.06em;
@@ -195,8 +195,8 @@
       align-items: center;
       gap: 6px;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 12px 32px rgba(0, 0, 0, 0.9);
+        0 0 12px rgba(111, 148, 199, 0.65),
+        0 12px 30px rgba(15, 23, 42, 0.4);
       transform-origin: center;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
@@ -204,8 +204,8 @@
     .nav-cta:hover {
       transform: translateY(-1px) scale(1.03);
       box-shadow:
-        0 0 30px rgba(211, 165, 16, 0.8),
-        0 16px 40px rgba(0, 0, 0, 0.95);
+        0 0 18px rgba(111, 148, 199, 0.85),
+        0 16px 38px rgba(15, 23, 42, 0.55);
       filter: brightness(1.03);
     }
 
@@ -217,8 +217,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #161001;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+      background: #0b1220;
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.7);
     }
 
     main {
@@ -232,7 +232,7 @@
       margin: 0 auto;
     }
 
-    /* Page header - FIXED: semantic structure */
+    /* Page header */
     .page-header {
       padding: 40px 0 24px;
       display: flex;
@@ -246,8 +246,8 @@
       gap: 8px;
       padding: 4px 10px 4px 4px;
       border-radius: 999px;
-      border: 1px solid rgba(211, 165, 16, 0.55);
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      border: 1px solid rgba(111, 148, 199, 0.8);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.6), transparent 60%);
       color: var(--text-muted);
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -259,10 +259,10 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      background: radial-gradient(circle at 30% 30%, #ffffff 0, #add8e6 40%, #6f94c7 100%);
       box-shadow:
-        0 0 14px rgba(211, 165, 16, 0.8),
-        0 0 26px rgba(120, 82, 255, 0.7);
+        0 0 14px rgba(173, 216, 230, 0.9),
+        0 0 26px rgba(111, 148, 199, 0.7);
     }
 
     .page-title {
@@ -270,10 +270,11 @@
       font-size: clamp(1.9rem, 3vw, 2.4rem);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #0b1120;
     }
 
     .page-title span {
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -286,13 +287,13 @@
       line-height: 1.7;
     }
 
-    /* Stepper - FIXED: Added proper navigation semantics */
+    /* Stepper */
     .stepper {
       margin-top: 24px;
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
       padding: 18px 18px 20px;
     }
 
@@ -321,12 +322,11 @@
 
     .mode-toggle {
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(4, 6, 11, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(248, 250, 252, 0.96);
       padding: 2px;
       display: inline-flex;
       gap: 2px;
-      role: group;
     }
 
     .mode-btn {
@@ -343,17 +343,17 @@
     }
 
     .mode-btn:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(226, 232, 240, 0.7);
     }
 
     .mode-btn:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
     .mode-btn.active {
-      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: linear-gradient(120deg, #6f94c7, #add8e6);
+      color: #0b1220;
     }
 
     .stepper-progress {
@@ -366,7 +366,7 @@
     .step-pill {
       height: 4px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(148, 163, 184, 0.3);
       overflow: hidden;
       position: relative;
     }
@@ -375,7 +375,7 @@
       position: absolute;
       inset: 0;
       width: 0%;
-      background: linear-gradient(90deg, #d3a410, #f3dd93);
+      background: linear-gradient(90deg, #6f94c7, #add8e6);
       transition: width 0.3s ease;
     }
 
@@ -394,7 +394,6 @@
       letter-spacing: 0.14em;
     }
 
-    /* FIXED: Added aria-live region for step announcements */
     .step-announce {
       position: absolute;
       left: -10000px;
@@ -427,7 +426,7 @@
     .step-text h2 {
       font-size: 1rem;
       margin-bottom: 6px;
-      color: #fbe6a6;
+      color: #0b1120;
     }
 
     .step-text ul {
@@ -441,8 +440,8 @@
 
     .step-visual {
       border-radius: var(--radius-md);
-      background: radial-gradient(circle at top, rgba(211, 165, 16, 0.18), transparent 60%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top, rgba(173, 216, 230, 0.4), transparent 60%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
       padding: 12px;
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -453,7 +452,7 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 4px;
-      color: var(--accent-soft);
+      color: #6f94c7;
     }
 
     .stepper-controls {
@@ -463,11 +462,10 @@
       gap: 10px;
     }
 
-    /* FIXED: Added proper button states and transitions */
     .step-btn {
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(4, 6, 11, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(248, 250, 252, 0.96);
       color: var(--text-main);
       padding: 8px 16px;
       font-size: 0.78rem;
@@ -478,13 +476,13 @@
     }
 
     .step-btn:hover:not(:disabled) {
-      background: rgba(10, 12, 20, 0.98);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: #e5edf9;
+      border-color: rgba(111, 148, 199, 0.9);
       transform: translateY(-1px);
     }
 
     .step-btn:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
@@ -494,9 +492,9 @@
     }
 
     .step-btn.primary {
-      border-color: rgba(211, 165, 16, 0.7);
-      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      border-color: rgba(111, 148, 199, 0.9);
+      background: linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
     }
 
     .step-btn.primary:hover:not(:disabled) {
@@ -515,10 +513,10 @@
 
     .demo-card {
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
       font-size: 0.86rem;
       color: var(--text-muted);
     }
@@ -533,7 +531,7 @@
 
     .demo-headline {
       font-size: 1rem;
-      color: #fbe6a6;
+      color: #0b1120;
       margin-bottom: 6px;
     }
 
@@ -554,12 +552,11 @@
       margin-bottom: 4px;
     }
 
-    /* FIXED: Added proper slider styling and accessibility */
     .slider {
       width: 100%;
       height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(148, 163, 184, 0.3);
       outline: none;
       -webkit-appearance: none;
       appearance: none;
@@ -571,35 +568,35 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: linear-gradient(120deg, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #6f94c7, #add8e6);
       cursor: pointer;
-      box-shadow: 0 0 12px rgba(211, 165, 16, 0.6);
+      box-shadow: 0 0 12px rgba(111, 148, 199, 0.7);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .slider::-webkit-slider-thumb:hover {
       transform: scale(1.15);
-      box-shadow: 0 0 18px rgba(211, 165, 16, 0.8);
+      box-shadow: 0 0 18px rgba(111, 148, 199, 0.9);
     }
 
     .slider::-moz-range-thumb {
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: linear-gradient(120deg, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #6f94c7, #add8e6);
       cursor: pointer;
       border: none;
-      box-shadow: 0 0 12px rgba(211, 165, 16, 0.6);
+      box-shadow: 0 0 12px rgba(111, 148, 199, 0.7);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .slider::-moz-range-thumb:hover {
       transform: scale(1.15);
-      box-shadow: 0 0 18px rgba(211, 165, 16, 0.8);
+      box-shadow: 0 0 18px rgba(111, 148, 199, 0.9);
     }
 
     .slider:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
@@ -623,10 +620,10 @@
 
     .silhouette-card {
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, rgba(211, 165, 16, 0.16), transparent 60%);
+      background: radial-gradient(circle at top, rgba(173, 216, 230, 0.35), transparent 60%);
       border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
     }
 
     .silhouette-title {
@@ -640,8 +637,8 @@
     .silhouette-box {
       height: 180px;
       border-radius: var(--radius-md);
-      background: radial-gradient(circle at center, #151827, #05070b 70%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: radial-gradient(circle at center, #e5edff, #f1f3f8 70%);
+      border: 1px solid rgba(148, 163, 184, 0.5);
       position: relative;
       margin-bottom: 10px;
       overflow: hidden;
@@ -655,10 +652,10 @@
       width: 80px;
       height: 130px;
       border-radius: 40px 40px 14px 14px;
-      background: linear-gradient(to bottom, #262a39, #101321);
+      background: linear-gradient(to bottom, #94a3b8, #64748b);
       box-shadow:
-        0 0 18px rgba(0, 0, 0, 0.8),
-        0 0 26px rgba(211, 165, 16, 0.12);
+        0 0 18px rgba(148, 163, 184, 0.8),
+        0 0 26px rgba(148, 163, 184, 0.4);
     }
 
     .silhouette-head {
@@ -669,7 +666,7 @@
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      background: linear-gradient(to bottom, #3a4255, #191d2a);
+      background: linear-gradient(to bottom, #cbd5f5, #94a3b8);
     }
 
     .screen {
@@ -679,17 +676,17 @@
       width: 80px;
       height: 52px;
       border-radius: 10px;
-      background: radial-gradient(circle at top, #151827, #05070b);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 0 18px rgba(211, 165, 16, 0.2);
+      background: radial-gradient(circle at top, #e5edff, #cbd5f5);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 0 18px rgba(111, 148, 199, 0.5);
     }
 
     .screen-glow {
       position: absolute;
       inset: 4px;
       border-radius: 8px;
-      background: radial-gradient(circle at top, rgba(241, 231, 181, 0.32), rgba(5, 7, 12, 0.95));
-      opacity: 0.8;
+      background: radial-gradient(circle at top, rgba(173, 216, 230, 0.5), rgba(248, 250, 252, 0.95));
+      opacity: 0.9;
     }
 
     .distance-label {
@@ -726,7 +723,6 @@
       color: var(--text-muted);
     }
 
-    /* FIXED: Made toggle a proper button */
     .tips-toggle {
       font-size: 0.76rem;
       color: var(--text-muted);
@@ -740,12 +736,12 @@
     }
 
     .tips-toggle:hover {
-      color: #fbe6a6;
-      background: rgba(255, 255, 255, 0.05);
+      color: #0b1120;
+      background: rgba(226, 232, 240, 0.8);
     }
 
     .tips-toggle:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
@@ -757,10 +753,10 @@
 
     .tip-card {
       border-radius: var(--radius-md);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 12px 12px 14px;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
       font-size: 0.82rem;
       color: var(--text-muted);
     }
@@ -769,14 +765,14 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--accent-soft);
+      color: #6f94c7;
       margin-bottom: 4px;
     }
 
     .tip-title {
       font-size: 0.9rem;
       margin-bottom: 4px;
-      color: var(--text-main);
+      color: #0b1120;
     }
 
     .tip-extra {
@@ -791,9 +787,9 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      border-top: 1px solid rgba(111, 148, 199, 0.6);
       padding: 18px 0 22px;
-      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+      background: radial-gradient(circle at 50% 0, rgba(173, 216, 230, 0.4), transparent 65%);
     }
 
     .footer-shell {
@@ -807,13 +803,13 @@
       font-size: clamp(1.9rem, 4vw, 2.6rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       text-shadow:
-        0 0 30px rgba(211, 165, 16, 0.9),
-        0 0 70px rgba(0, 0, 0, 1);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 0 40px rgba(148, 163, 184, 1);
       margin-bottom: 8px;
     }
 
@@ -824,7 +820,7 @@
     }
 
     .footer-credits span {
-      color: #f1e0a8;
+      color: #1d4ed8;
     }
 
     .footer-links {
@@ -842,7 +838,7 @@
     }
 
     .footer-links a:hover {
-      color: #fbe6a6;
+      color: #4876b0;
       text-decoration: underline;
     }
 
@@ -867,7 +863,7 @@
   <header>
     <div class="nav-shell" id="navShell">
       <a href="index.html" class="logo">
-        <div class="logo-mark"></div>
+        <img src="img.png" alt="ErgoMatrix logo" class="logo-img" />
         <div>
           <div class="logo-text-main">ErgoMatrix</div>
           <div class="logo-text-sub">Posture Pro System</div>
@@ -889,7 +885,6 @@
 
   <main>
     <div class="shell">
-      <!-- FIXED: Changed from <header> to <section> -->
       <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
@@ -904,7 +899,6 @@
         </p>
       </section>
 
-      <!-- Stepper - FIXED: Added navigation semantics and ARIA -->
       <nav class="stepper" id="stepper" aria-label="Setup guide navigation">
         <div class="stepper-header">
           <div class="stepper-title">Setup guide</div>
@@ -930,7 +924,6 @@
           <span>Train</span>
         </div>
 
-        <!-- FIXED: Added ARIA live region for step announcements -->
         <div class="step-announce" role="status" aria-live="polite" aria-atomic="true" id="stepAnnounce"></div>
 
         <div class="step-body">
@@ -1049,13 +1042,12 @@
               <span id="distanceLabel">Comfort zone · ~55cm</span>
               <span>Too far</span>
             </div>
-            <!-- FIXED: Added proper ARIA attributes to slider -->
-            <input 
-              type="range" 
-              min="30" 
-              max="90" 
-              value="55" 
-              class="slider" 
+            <input
+              type="range"
+              min="30"
+              max="90"
+              value="55"
+              class="slider"
               id="distanceSlider"
               aria-label="Screen distance simulation"
               aria-valuemin="30"
@@ -1092,9 +1084,8 @@
       <section class="tips-section">
         <div class="tips-header">
           <h2 class="tips-title">Daily posture habits</h2>
-          <!-- FIXED: Changed to proper button with ARIA -->
-          <button 
-            class="tips-toggle" 
+          <button
+            class="tips-toggle"
             id="tipsToggle"
             aria-expanded="false"
             aria-controls="tipsGrid"
@@ -1181,7 +1172,7 @@
       }
     });
 
-    // Stepper logic - FIXED: Added ARIA state management
+    // Stepper logic
     const steps = Array.from(document.querySelectorAll(".step"));
     const nextBtn = document.getElementById("nextStep");
     const prevBtn = document.getElementById("prevStep");
@@ -1199,32 +1190,34 @@
         const stepNum = Number(step.dataset.step);
         const isActive = stepNum === currentStep;
         step.classList.toggle("active", isActive);
-        
-        // Update ARIA
+
         if (isActive) {
           step.setAttribute("aria-current", "step");
         } else {
           step.removeAttribute("aria-current");
         }
       });
-      
+
       bars.forEach((bar, index) => {
         const stepIndex = index + 1;
         bar.style.width = stepIndex <= currentStep ? "100%" : "0%";
       });
-      
+
       prevBtn.disabled = currentStep === 1;
       nextBtn.textContent = currentStep === 4 ? "Finish" : "Next step";
-      
-      // Update ARIA disabled state
+
       if (currentStep === 1) {
         prevBtn.setAttribute("aria-disabled", "true");
       } else {
         prevBtn.removeAttribute("aria-disabled");
       }
-      
-      // Announce step change
-      const stepTitles = ["Place the Eye-Q Sensor", "Attach the Mesh-Up", "Connect and calibrate", "Start your posture training"];
+
+      const stepTitles = [
+        "Place the Eye-Q Sensor",
+        "Attach the Mesh-Up",
+        "Connect and calibrate",
+        "Start your posture training"
+      ];
       stepAnnounce.textContent = `Step ${currentStep} of 4: ${stepTitles[currentStep - 1]}`;
     }
 
@@ -1244,7 +1237,7 @@
 
     updateStepper();
 
-    // Mode toggle (quick vs detailed) - FIXED: Added ARIA state management
+    // Mode toggle (quick vs detailed)
     const modeButtons = document.querySelectorAll(".mode-btn");
     modeButtons.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1254,7 +1247,7 @@
         });
         btn.classList.add("active");
         btn.setAttribute("aria-pressed", "true");
-        
+
         const mode = btn.dataset.mode;
         const lists = document.querySelectorAll(".step-text ul");
         lists.forEach(list => {
@@ -1263,7 +1256,7 @@
       });
     });
 
-    // Distance slider demo - FIXED: Added ARIA updates
+    // Distance slider demo
     const slider = document.getElementById("distanceSlider");
     const statusPill = document.getElementById("statusPill");
     const statusDot = document.getElementById("statusDot");
@@ -1278,35 +1271,32 @@
       else if (value > 70) state = "far";
       else state = "comfort";
 
-      const stateText = state === "comfort" ? "Comfort zone" : state === "close" ? "Too close" : "Too far";
+      const stateText =
+        state === "comfort" ? "Comfort zone" : state === "close" ? "Too close" : "Too far";
       distanceLabel.textContent = stateText + " · ~" + value + "cm";
       distanceBadge.textContent = "~" + value + "cm";
-      
-      // Update ARIA attributes
+
       slider.setAttribute("aria-valuenow", value);
       slider.setAttribute("aria-valuetext", `${value} centimeters - ${stateText}`);
 
       if (state === "comfort") {
-        statusPill.style.background = "rgba(24, 68, 45, 0.7)";
-        statusDot.style.background = "#35d07f";
+        statusPill.style.background = "rgba(22, 163, 74, 0.18)";
+        statusDot.style.background = "#16a34a";
         statusText.textContent = "Good distance. Eye strain minimized, posture stable.";
         tipText.textContent =
-          "In the comfort zone, your head stays roughly over your shoulders and hips. Eye-Q quietly " +
-          "confirms this while Mesh-Up stays still in the background.";
+          "In the comfort zone, your head stays roughly over your shoulders and hips. Eye-Q quietly confirms this while Mesh-Up stays still in the background.";
       } else if (state === "close") {
-        statusPill.style.background = "rgba(100, 35, 35, 0.7)";
-        statusDot.style.background = "#ff5c5c";
+        statusPill.style.background = "rgba(239, 68, 68, 0.18)";
+        statusDot.style.background = "#ef4444";
         statusText.textContent = "You are too close. Neck flexion and eye strain increase quickly.";
         tipText.textContent =
-          "Leaning too close pulls your head forward and compresses your neck. Posture Pro would begin " +
-          "flagging slumps here so you can slide back and reset.";
+          "Leaning too close pulls your head forward and compresses your neck. Posture Pro would begin flagging slumps here so you can slide back and reset.";
       } else {
-        statusPill.style.background = "rgba(64, 60, 110, 0.7)";
-        statusDot.style.background = "#ffd166";
+        statusPill.style.background = "rgba(234, 179, 8, 0.18)";
+        statusDot.style.background = "#eab308";
         statusText.textContent = "You are quite far. You may start leaning or squinting to see details.";
         tipText.textContent =
-          "Sitting too far away can tempt you to lean forward or crane your neck. Adjust your chair " +
-          "and screen or move them closer so posture corrections stay easy.";
+          "Sitting too far away can tempt you to lean forward or crane your neck. Adjust your chair and screen or move them closer so posture corrections stay easy.";
       }
     }
 
@@ -1316,7 +1306,7 @@
 
     updateDistanceUI(Number(slider.value));
 
-    // Tips detail toggle - FIXED: Added ARIA state management
+    // Tips detail toggle
     const tipsToggle = document.getElementById("tipsToggle");
     const tipsGrid = document.getElementById("tipsGrid");
     let tipsLong = false;
