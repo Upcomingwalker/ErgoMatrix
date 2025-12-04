@@ -14,15 +14,15 @@
 
   <style>
     :root {
-      --bg-main: #05070b;
-      --bg-elevated: #111319;
-      --accent: #d3a410;
-      --accent-soft: #d3a51054;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a3b1;
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --glass: rgba(7, 9, 15, 0.84);
-      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --bg-main: #f1f3f8;
+      --bg-elevated: #ffffff;
+      --accent: #6f94c7;
+      --accent-soft: #add8e6;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: rgba(15, 23, 42, 0.08);
+      --glass: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.12);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-pill: 999px;
@@ -39,7 +39,7 @@
     html, body {
       height: 100%;
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      background: radial-gradient(circle at top, #ffffff 0, #f1f3f8 45%, #e2e8f0 100%);
       color: var(--text-main);
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
@@ -51,13 +51,13 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
-      opacity: 0.85;
+        radial-gradient(circle at 10% 0%, rgba(173, 216, 230, 0.26), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(111, 148, 199, 0.24), transparent 55%);
+      opacity: 0.9;
       z-index: -1;
     }
 
-    /* Floating header (same as index) */
+    /* Floating header */
     header {
       position: fixed;
       inset-inline: 0;
@@ -78,27 +78,28 @@
       border-radius: var(--radius-pill);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.18),
-          rgba(8, 11, 20, 0.95),
-          rgba(112, 82, 255, 0.16)
+          rgba(173, 216, 230, 0.55),
+          rgba(255, 255, 255, 0.96),
+          rgba(111, 148, 199, 0.16)
         );
       backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
       pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
-        border-color var(--transition-fast);
+        border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-shell.scrolled {
       transform: translateY(-6px) scale(0.98);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.16),
-          rgba(5, 7, 13, 0.96),
-          rgba(64, 51, 178, 0.26)
+          rgba(173, 216, 230, 0.28),
+          rgba(241, 243, 248, 0.98),
+          rgba(111, 148, 199, 0.18)
         );
-      border-color: rgba(211, 165, 16, 0.38);
+      border-color: rgba(111, 148, 199, 0.7);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
     }
 
     .logo {
@@ -109,15 +110,14 @@
       color: var(--text-main);
     }
 
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 12px;
-      border: 1px solid rgba(211, 165, 16, 0.7);
-      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      object-fit: cover;
       box-shadow:
-        0 0 18px rgba(211, 165, 16, 0.7),
-        0 0 40px rgba(64, 51, 178, 0.6);
+        0 0 12px rgba(173, 216, 230, 0.9),
+        0 0 22px rgba(111, 148, 199, 0.7);
     }
 
     .logo-text-main {
@@ -165,8 +165,8 @@
     }
 
     nav a:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.02);
+      color: #0f172a;
+      background: rgba(148, 163, 184, 0.08);
       transform: translateY(-1px);
     }
 
@@ -179,9 +179,9 @@
       margin-left: 4px;
       padding: 8px 16px;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
-        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: radial-gradient(circle at 0 0, rgba(241, 243, 248, 0.9), transparent 55%),
+        linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.06em;
@@ -192,8 +192,8 @@
       align-items: center;
       gap: 6px;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 12px 32px rgba(0, 0, 0, 0.9);
+        0 0 12px rgba(111, 148, 199, 0.65),
+        0 12px 30px rgba(15, 23, 42, 0.4);
       transform-origin: center;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
@@ -201,8 +201,8 @@
     .nav-cta:hover {
       transform: translateY(-1px) scale(1.03);
       box-shadow:
-        0 0 30px rgba(211, 165, 16, 0.8),
-        0 16px 40px rgba(0, 0, 0, 0.95);
+        0 0 18px rgba(111, 148, 199, 0.85),
+        0 16px 38px rgba(15, 23, 42, 0.55);
       filter: brightness(1.03);
     }
 
@@ -214,8 +214,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #161001;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+      background: #0b1220;
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.7);
     }
 
     main {
@@ -229,7 +229,7 @@
       margin: 0 auto;
     }
 
-    /* Page header - FIXED: Changed from <header> to semantic section */
+    /* Page header */
     .page-header {
       padding: 40px 0 24px;
       display: flex;
@@ -243,8 +243,8 @@
       gap: 8px;
       padding: 4px 10px 4px 4px;
       border-radius: 999px;
-      border: 1px solid rgba(211, 165, 16, 0.55);
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      border: 1px solid rgba(111, 148, 199, 0.8);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.6), transparent 60%);
       color: var(--text-muted);
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -256,10 +256,10 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      background: radial-gradient(circle at 30% 30%, #ffffff 0, #add8e6 40%, #6f94c7 100%);
       box-shadow:
-        0 0 14px rgba(211, 165, 16, 0.8),
-        0 0 26px rgba(120, 82, 255, 0.7);
+        0 0 14px rgba(173, 216, 230, 0.9),
+        0 0 26px rgba(111, 148, 199, 0.7);
     }
 
     .page-title {
@@ -267,10 +267,11 @@
       font-size: clamp(1.9rem, 3vw, 2.4rem);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #0b1120;
     }
 
     .page-title span {
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -293,9 +294,9 @@
 
     .card {
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
       padding: 18px 18px 20px;
       position: relative;
       overflow: hidden;
@@ -306,9 +307,9 @@
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.2), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(120, 82, 255, 0.25), transparent 55%);
-      opacity: 0.18;
+        radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.4), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(111, 148, 199, 0.35), transparent 55%);
+      opacity: 0.25;
       pointer-events: none;
     }
 
@@ -327,6 +328,7 @@
     .card-heading {
       font-size: 1.05rem;
       margin-bottom: 10px;
+      color: #0b1120;
     }
 
     .card-body {
@@ -353,8 +355,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: rgba(211, 165, 16, 0.8);
-      box-shadow: 0 0 12px rgba(211, 165, 16, 0.8);
+      background: rgba(111, 148, 199, 0.9);
+      box-shadow: 0 0 12px rgba(111, 148, 199, 0.7);
       margin-top: 5px;
       flex-shrink: 0;
     }
@@ -393,12 +395,11 @@
     .future-card {
       position: relative;
       border-radius: var(--radius-md);
-      background: rgba(6, 8, 14, 0.98);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
       overflow: hidden;
-      /* FIXED: Added transition for smooth hover effect */
       transition: transform var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med);
     }
 
@@ -406,7 +407,7 @@
       content: "";
       position: absolute;
       inset: -60%;
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.25), transparent 60%);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.5), transparent 60%);
       opacity: 0;
       transition: opacity var(--transition-med), transform var(--transition-med);
       transform: translate3d(-10%, -10%, 0);
@@ -418,24 +419,25 @@
     }
 
     .future-card:hover {
-      border-color: rgba(211, 165, 16, 0.6);
+      border-color: rgba(111, 148, 199, 0.7);
       transform: translateY(-4px);
       box-shadow: 
-        0 18px 50px rgba(0, 0, 0, 0.95),
-        0 0 30px rgba(211, 165, 16, 0.2);
+        0 18px 50px rgba(15, 23, 42, 0.18),
+        0 0 30px rgba(111, 148, 199, 0.26);
     }
 
     .future-label {
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-soft);
+      color: #6f94c7;
       margin-bottom: 6px;
     }
 
     .future-heading {
       font-size: 0.96rem;
       margin-bottom: 6px;
+      color: #0b1120;
     }
 
     .future-body {
@@ -457,9 +459,9 @@
       letter-spacing: 0.16em;
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       color: var(--text-muted);
-      background: rgba(5, 7, 11, 0.95);
+      background: rgba(248, 250, 252, 0.95);
     }
 
     /* Stats */
@@ -472,7 +474,7 @@
 
     .stat-card {
       border-radius: var(--radius-md);
-      background: rgba(7, 9, 16, 0.98);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 12px 14px 14px;
       text-align: left;
@@ -491,7 +493,8 @@
     .stat-value {
       font-size: 1.4rem;
       margin-bottom: 4px;
-      color: #fbe6a6;
+      color: #0b1120;
+      font-weight: 600;
     }
 
     .stat-sub {
@@ -501,9 +504,9 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      border-top: 1px solid rgba(111, 148, 199, 0.6);
       padding: 18px 0 22px;
-      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+      background: radial-gradient(circle at 50% 0, rgba(173, 216, 230, 0.4), transparent 65%);
     }
 
     .footer-shell {
@@ -517,13 +520,13 @@
       font-size: clamp(1.9rem, 4vw, 2.6rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       text-shadow:
-        0 0 30px rgba(211, 165, 16, 0.9),
-        0 0 70px rgba(0, 0, 0, 1);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 0 40px rgba(148, 163, 184, 1);
       margin-bottom: 8px;
     }
 
@@ -534,7 +537,7 @@
     }
 
     .footer-credits span {
-      color: #f1e0a8;
+      color: #1d4ed8;
     }
 
     .footer-links {
@@ -552,7 +555,7 @@
     }
 
     .footer-links a:hover {
-      color: #fbe6a6;
+      color: #4876b0;
       text-decoration: underline;
     }
 
@@ -573,7 +576,7 @@
   <header>
     <div class="nav-shell" id="navShell">
       <a href="index.html" class="logo">
-        <div class="logo-mark"></div>
+        <img src="img.png" alt="ErgoMatrix logo" class="logo-img" />
         <div>
           <div class="logo-text-main">ErgoMatrix</div>
           <div class="logo-text-sub">Posture Pro System</div>
@@ -595,7 +598,6 @@
 
   <main>
     <div class="shell">
-      <!-- FIXED: Changed from <header> to <section> for proper semantic structure -->
       <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
