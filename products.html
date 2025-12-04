@@ -14,15 +14,15 @@
 
   <style>
     :root {
-      --bg-main: #05070b;
-      --bg-elevated: #111319;
-      --accent: #d3a410;
-      --accent-soft: #d3a51054;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a3b1;
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --glass: rgba(7, 9, 15, 0.84);
-      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --bg-main: #f1f3f8;
+      --bg-elevated: #ffffff;
+      --accent: #6f94c7;
+      --accent-soft: #add8e6;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: rgba(15, 23, 42, 0.08);
+      --glass: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.12);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-pill: 999px;
@@ -39,7 +39,7 @@
     html, body {
       height: 100%;
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      background: radial-gradient(circle at top, #ffffff 0, #f1f3f8 45%, #e2e8f0 100%);
       color: var(--text-main);
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
@@ -51,9 +51,9 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
-      opacity: 0.85;
+        radial-gradient(circle at 10% 0%, rgba(173, 216, 230, 0.26), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(111, 148, 199, 0.24), transparent 55%);
+      opacity: 0.9;
       z-index: -1;
     }
 
@@ -78,27 +78,28 @@
       border-radius: var(--radius-pill);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.18),
-          rgba(8, 11, 20, 0.95),
-          rgba(112, 82, 255, 0.16)
+          rgba(173, 216, 230, 0.55),
+          rgba(255, 255, 255, 0.96),
+          rgba(111, 148, 199, 0.16)
         );
       backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
       pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
-        border-color var(--transition-fast);
+        border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-shell.scrolled {
       transform: translateY(-6px) scale(0.98);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.16),
-          rgba(5, 7, 13, 0.96),
-          rgba(64, 51, 178, 0.26)
+          rgba(173, 216, 230, 0.28),
+          rgba(241, 243, 248, 0.98),
+          rgba(111, 148, 199, 0.18)
         );
-      border-color: rgba(211, 165, 16, 0.38);
+      border-color: rgba(111, 148, 199, 0.7);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
     }
 
     .logo {
@@ -109,15 +110,14 @@
       color: var(--text-main);
     }
 
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 12px;
-      border: 1px solid rgba(211, 165, 16, 0.7);
-      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      object-fit: cover;
       box-shadow:
-        0 0 18px rgba(211, 165, 16, 0.7),
-        0 0 40px rgba(64, 51, 178, 0.6);
+        0 0 12px rgba(173, 216, 230, 0.9),
+        0 0 22px rgba(111, 148, 199, 0.7);
     }
 
     .logo-text-main {
@@ -165,8 +165,8 @@
     }
 
     nav a:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.02);
+      color: #0f172a;
+      background: rgba(148, 163, 184, 0.08);
       transform: translateY(-1px);
     }
 
@@ -179,9 +179,9 @@
       margin-left: 4px;
       padding: 8px 16px;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
-        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: radial-gradient(circle at 0 0, rgba(241, 243, 248, 0.9), transparent 55%),
+        linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.06em;
@@ -192,8 +192,8 @@
       align-items: center;
       gap: 6px;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 12px 32px rgba(0, 0, 0, 0.9);
+        0 0 12px rgba(111, 148, 199, 0.65),
+        0 12px 30px rgba(15, 23, 42, 0.4);
       transform-origin: center;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
@@ -201,8 +201,8 @@
     .nav-cta:hover {
       transform: translateY(-1px) scale(1.03);
       box-shadow:
-        0 0 30px rgba(211, 165, 16, 0.8),
-        0 16px 40px rgba(0, 0, 0, 0.95);
+        0 0 18px rgba(111, 148, 199, 0.85),
+        0 16px 38px rgba(15, 23, 42, 0.55);
       filter: brightness(1.03);
     }
 
@@ -214,8 +214,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #161001;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+      background: #0b1220;
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.7);
     }
 
     main {
@@ -229,7 +229,7 @@
       margin: 0 auto;
     }
 
-    /* Page header - FIXED: semantic structure */
+    /* Page header */
     .page-header {
       padding: 40px 0 24px;
       display: flex;
@@ -243,8 +243,8 @@
       gap: 8px;
       padding: 4px 10px 4px 4px;
       border-radius: 999px;
-      border: 1px solid rgba(211, 165, 16, 0.55);
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      border: 1px solid rgba(111, 148, 199, 0.8);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.6), transparent 60%);
       color: var(--text-muted);
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -256,10 +256,10 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      background: radial-gradient(circle at 30% 30%, #ffffff 0, #add8e6 40%, #6f94c7 100%);
       box-shadow:
-        0 0 14px rgba(211, 165, 16, 0.8),
-        0 0 26px rgba(120, 82, 255, 0.7);
+        0 0 14px rgba(173, 216, 230, 0.9),
+        0 0 26px rgba(111, 148, 199, 0.7);
     }
 
     .page-title {
@@ -267,10 +267,11 @@
       font-size: clamp(1.9rem, 3vw, 2.4rem);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #0b1120;
     }
 
     .page-title span {
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -294,9 +295,9 @@
     .product-card {
       position: relative;
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
       padding: 16px 16px 18px;
       overflow: hidden;
       transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
@@ -307,8 +308,8 @@
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.25), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(120, 82, 255, 0.26), transparent 55%);
+        radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.5), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(111, 148, 199, 0.35), transparent 55%);
       opacity: 0;
       transform: translate3d(-10%, -10%, 0);
       transition: opacity var(--transition-med), transform var(--transition-med);
@@ -316,11 +317,11 @@
 
     .product-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(211, 165, 16, 0.6);
-      background: rgba(9, 11, 20, 0.98);
+      border-color: rgba(111, 148, 199, 0.7);
+      background: #f9fafb;
       box-shadow:
-        0 22px 60px rgba(0, 0, 0, 0.96),
-        0 0 30px rgba(211, 165, 16, 0.2);
+        0 22px 60px rgba(15, 23, 42, 0.18),
+        0 0 30px rgba(111, 148, 199, 0.26);
     }
 
     .product-card:hover::before {
@@ -337,19 +338,20 @@
       font-size: 0.66rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(211, 165, 16, 0.7);
-      color: #fbe6a6;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(111, 148, 199, 0.9);
+      color: #e0edff;
     }
 
     .product-title {
       font-size: 1rem;
       margin-bottom: 4px;
+      color: #0b1120;
     }
 
     .product-subtitle {
       font-size: 0.8rem;
-      color: var(--accent-soft);
+      color: #6f94c7;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 10px;
@@ -372,13 +374,15 @@
 
     .product-price {
       font-size: 1rem;
-      color: #fbe6a6;
+      color: #0b1120;
+      font-weight: 600;
     }
 
     .product-price span {
       font-size: 0.8rem;
       color: var(--text-muted);
       margin-left: 4px;
+      font-weight: 400;
     }
 
     .product-tagline {
@@ -400,8 +404,8 @@
       gap: 6px;
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(4, 6, 11, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(248, 250, 252, 0.96);
       font-size: 0.78rem;
       color: var(--text-muted);
     }
@@ -411,8 +415,8 @@
       height: 20px;
       border-radius: 999px;
       border: none;
-      background: rgba(16, 18, 26, 0.98);
-      color: #fbe6a6;
+      background: rgba(226, 232, 240, 0.98);
+      color: #4876b0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -423,12 +427,12 @@
     }
 
     .qty-btn:hover {
-      background: rgba(211, 165, 16, 0.2);
+      background: rgba(173, 216, 230, 0.5);
       transform: scale(1.1);
     }
 
     .qty-btn:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
@@ -448,19 +452,19 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 14px 34px rgba(0, 0, 0, 0.9);
+        0 0 18px rgba(111, 148, 199, 0.7),
+        0 14px 34px rgba(15, 23, 42, 0.35);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
 
     .btn-buy:hover {
       transform: translateY(-1px) scale(1.02);
       box-shadow:
-        0 0 28px rgba(211, 165, 16, 0.8),
-        0 18px 40px rgba(0, 0, 0, 0.96);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 18px 40px rgba(15, 23, 42, 0.45);
       filter: brightness(1.03);
     }
 
@@ -480,10 +484,10 @@
 
     .summary-card {
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
-      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 16px 60px rgba(15, 23, 42, 0.14);
       font-size: 0.86rem;
       color: var(--text-muted);
     }
@@ -495,11 +499,11 @@
     }
 
     .summary-row.total {
-      border-top: 1px dashed rgba(255, 255, 255, 0.14);
+      border-top: 1px dashed rgba(148, 163, 184, 0.5);
       padding-top: 8px;
       margin-top: 4px;
       font-weight: 600;
-      color: #fbe6a6;
+      color: #0b1120;
     }
 
     .btn-checkout {
@@ -508,24 +512,24 @@
       border-radius: var(--radius-pill);
       padding: 10px 16px;
       border: none;
-      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
-        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: radial-gradient(circle at 0 0, rgba(241, 243, 248, 0.9), transparent 55%),
+        linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       font-size: 0.8rem;
       cursor: pointer;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 14px 34px rgba(0, 0, 0, 0.9);
+        0 0 18px rgba(111, 148, 199, 0.7),
+        0 14px 34px rgba(15, 23, 42, 0.35);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .btn-checkout:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 28px rgba(211, 165, 16, 0.8),
-        0 18px 40px rgba(0, 0, 0, 0.96);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 18px 40px rgba(15, 23, 42, 0.45);
     }
 
     .checkout-note {
@@ -548,10 +552,9 @@
     }
 
     .faq-item {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
     }
 
-    /* FIXED: Proper button semantics for FAQ */
     .faq-question {
       width: 100%;
       display: flex;
@@ -569,11 +572,11 @@
     }
 
     .faq-question:hover {
-      color: #fbe6a6;
+      color: #4876b0;
     }
 
     .faq-question:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.6);
+      outline: 2px solid rgba(111, 148, 199, 0.7);
       outline-offset: 2px;
     }
 
@@ -593,7 +596,7 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -604,14 +607,14 @@
 
     .faq-question[aria-expanded="true"] .faq-toggle {
       transform: rotate(45deg);
-      border-color: rgba(211, 165, 16, 0.8);
+      border-color: rgba(111, 148, 199, 0.9);
     }
 
-    /* Modal - FIXED: Proper accessibility */
+    /* Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(15, 23, 42, 0.85);
       display: none;
       align-items: center;
       justify-content: center;
@@ -621,9 +624,9 @@
     .modal {
       width: min(360px, 100% - 40px);
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 16, 0.96);
-      border: 1px solid rgba(211, 165, 16, 0.5);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.96);
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(111, 148, 199, 0.7);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.3);
       padding: 18px 16px 16px;
       text-align: center;
       font-size: 0.86rem;
@@ -633,7 +636,7 @@
     .modal-title {
       font-size: 0.96rem;
       margin-bottom: 6px;
-      color: #fbe6a6;
+      color: #0b1120;
     }
 
     .modal-btn {
@@ -641,8 +644,8 @@
       padding: 8px 16px;
       border-radius: var(--radius-pill);
       border: none;
-      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.13em;
@@ -656,15 +659,15 @@
     }
 
     .modal-btn:focus {
-      outline: 2px solid rgba(211, 165, 16, 0.8);
+      outline: 2px solid rgba(111, 148, 199, 0.9);
       outline-offset: 2px;
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      border-top: 1px solid rgba(111, 148, 199, 0.6);
       padding: 18px 0 22px;
-      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+      background: radial-gradient(circle at 50% 0, rgba(173, 216, 230, 0.4), transparent 65%);
     }
 
     .footer-shell {
@@ -678,13 +681,13 @@
       font-size: clamp(1.9rem, 4vw, 2.6rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       text-shadow:
-        0 0 30px rgba(211, 165, 16, 0.9),
-        0 0 70px rgba(0, 0, 0, 1);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 0 40px rgba(148, 163, 184, 1);
       margin-bottom: 8px;
     }
 
@@ -695,7 +698,7 @@
     }
 
     .footer-credits span {
-      color: #f1e0a8;
+      color: #1d4ed8;
     }
 
     .footer-links {
@@ -713,7 +716,7 @@
     }
 
     .footer-links a:hover {
-      color: #fbe6a6;
+      color: #4876b0;
       text-decoration: underline;
     }
 
@@ -731,7 +734,7 @@
   </style>
 </head>
 <body>
-  <!-- Modal - FIXED: Added proper ARIA attributes -->
+  <!-- Modal -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal" id="modal">
       <h2 class="modal-title" id="modalTitle">Demo checkout</h2>
@@ -746,7 +749,7 @@
   <header>
     <div class="nav-shell" id="navShell">
       <a href="index.html" class="logo">
-        <div class="logo-mark"></div>
+        <img src="img.png" alt="ErgoMatrix logo" class="logo-img" />
         <div>
           <div class="logo-text-main">ErgoMatrix</div>
           <div class="logo-text-sub">Posture Pro System</div>
@@ -768,7 +771,6 @@
 
   <main>
     <div class="shell">
-      <!-- FIXED: Changed from <header> to <section> -->
       <section class="page-header">
         <div class="page-pill">
           <div class="page-pill-dot"></div>
@@ -798,7 +800,6 @@
             <div class="product-tagline">Perfect if you already love your chair.</div>
           </div>
           <div class="product-actions">
-            <!-- FIXED: Added aria-labels for screen readers -->
             <div class="qty-control" role="group" aria-label="Quantity selector for Eye-Q Sensor">
               <button class="qty-btn" data-action="minus" data-target="eyeq" aria-label="Decrease quantity">-</button>
               <span class="qty-value" id="qty-eyeq" aria-live="polite">1</span>
@@ -894,7 +895,7 @@
         </aside>
       </section>
 
-      <!-- FAQ - FIXED: Proper button semantics with ARIA -->
+      <!-- FAQ -->
       <section class="faq-section">
         <h2 class="faq-title">Product FAQ</h2>
 
@@ -1027,7 +1028,7 @@
       });
     });
 
-    // FAQ accordion - FIXED: Proper ARIA state management
+    // FAQ accordion
     document.querySelectorAll(".faq-item").forEach(item => {
       const question = item.querySelector(".faq-question");
       const answer = item.querySelector(".faq-answer");
@@ -1053,7 +1054,7 @@
       });
     });
 
-    // Modal - FIXED: Proper focus management and ARIA
+    // Modal
     const checkoutBtn = document.getElementById("checkoutBtn");
     const modalBackdrop = document.getElementById("modalBackdrop");
     const modalClose = document.getElementById("modalClose");
@@ -1063,14 +1064,12 @@
       lastFocusedElement = document.activeElement;
       modalBackdrop.style.display = "flex";
       modalBackdrop.setAttribute("aria-hidden", "false");
-      // Focus the close button
       setTimeout(() => modalClose.focus(), 100);
     }
 
     function closeModal() {
       modalBackdrop.style.display = "none";
       modalBackdrop.setAttribute("aria-hidden", "true");
-      // Return focus to triggering element
       if (lastFocusedElement) {
         lastFocusedElement.focus();
       }
@@ -1085,7 +1084,6 @@
       }
     });
 
-    // ESC key to close modal
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modalBackdrop.style.display === "flex") {
         closeModal();
