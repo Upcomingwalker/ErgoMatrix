@@ -16,15 +16,15 @@
   <!-- Global Styles -->
   <style>
     :root {
-      --bg-main: #05070b;
-      --bg-elevated: #111319;
-      --accent: #d3a410;
-      --accent-soft: #d3a51054;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a3b1;
-      --border-soft: rgba(255, 255, 255, 0.06);
-      --glass: rgba(7, 9, 15, 0.84);
-      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.86);
+      --bg-main: #f1f3f8;
+      --bg-elevated: #ffffff;
+      --accent: #6f94c7;
+      --accent-soft: #add8e6;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: rgba(15, 23, 42, 0.08);
+      --glass: rgba(255, 255, 255, 0.82);
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.12);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-pill: 999px;
@@ -41,7 +41,7 @@
     html, body {
       height: 100%;
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #151827 0, #05070b 45%, #020309 100%);
+      background: radial-gradient(circle at top, #ffffff 0, #f1f3f8 45%, #e2e8f0 100%);
       color: var(--text-main);
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
@@ -53,9 +53,9 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 10% 0%, rgba(211, 165, 16, 0.12), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(120, 82, 255, 0.16), transparent 55%);
-      opacity: 0.85;
+        radial-gradient(circle at 10% 0%, rgba(173, 216, 230, 0.26), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(111, 148, 199, 0.24), transparent 55%);
+      opacity: 0.9;
       z-index: -1;
     }
 
@@ -80,27 +80,28 @@
       border-radius: var(--radius-pill);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.18),
-          rgba(8, 11, 20, 0.95),
-          rgba(112, 82, 255, 0.16)
+          rgba(173, 216, 230, 0.55),
+          rgba(255, 255, 255, 0.96),
+          rgba(111, 148, 199, 0.16)
         );
       backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
       pointer-events: auto;
       transition: transform var(--transition-med), background var(--transition-fast),
-        border-color var(--transition-fast);
+        border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-shell.scrolled {
       transform: translateY(-6px) scale(0.98);
       background: linear-gradient(
           135deg,
-          rgba(211, 165, 16, 0.16),
-          rgba(5, 7, 13, 0.96),
-          rgba(64, 51, 178, 0.26)
+          rgba(173, 216, 230, 0.28),
+          rgba(241, 243, 248, 0.98),
+          rgba(111, 148, 199, 0.18)
         );
-      border-color: rgba(211, 165, 16, 0.38);
+      border-color: rgba(111, 148, 199, 0.7);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.18);
     }
 
     .logo {
@@ -111,15 +112,14 @@
       color: var(--text-main);
     }
 
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 12px;
-      border: 1px solid rgba(211, 165, 16, 0.7);
-      background: radial-gradient(circle at 30% 10%, #ffe4a1 0, #b7870f 40%, #151820 100%);
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      object-fit: cover;
       box-shadow:
-        0 0 18px rgba(211, 165, 16, 0.7),
-        0 0 40px rgba(64, 51, 178, 0.6);
+        0 0 12px rgba(173, 216, 230, 0.9),
+        0 0 22px rgba(111, 148, 199, 0.7);
     }
 
     .logo-text-main {
@@ -167,8 +167,8 @@
     }
 
     nav a:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.02);
+      color: #0f172a;
+      background: rgba(148, 163, 184, 0.08);
       transform: translateY(-1px);
     }
 
@@ -181,9 +181,9 @@
       margin-left: 4px;
       padding: 8px 16px;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, rgba(255, 251, 235, 0.35), transparent 55%),
-        linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: radial-gradient(circle at 0 0, rgba(241, 243, 248, 0.9), transparent 55%),
+        linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.06em;
@@ -194,8 +194,8 @@
       align-items: center;
       gap: 6px;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 12px 32px rgba(0, 0, 0, 0.9);
+        0 0 12px rgba(111, 148, 199, 0.65),
+        0 12px 30px rgba(15, 23, 42, 0.4);
       transform-origin: center;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
@@ -203,8 +203,8 @@
     .nav-cta:hover {
       transform: translateY(-1px) scale(1.03);
       box-shadow:
-        0 0 30px rgba(211, 165, 16, 0.8),
-        0 16px 40px rgba(0, 0, 0, 0.95);
+        0 0 18px rgba(111, 148, 199, 0.85),
+        0 16px 38px rgba(15, 23, 42, 0.55);
       filter: brightness(1.03);
     }
 
@@ -216,18 +216,18 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #161001;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+      background: #0b1220;
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.7);
     }
 
-    /* Loader overlay (using your SVG) */
+    /* Loader overlay */
     .loader-overlay {
       position: fixed;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #151827 0, #05070b 55%, #020309 100%);
+      background: radial-gradient(circle at top, #ffffff 0, #f1f3f8 55%, #e2e8f0 100%);
       z-index: 100;
       transition: opacity 0.45s ease, visibility 0.45s ease;
     }
@@ -244,9 +244,9 @@
       gap: 18px;
       padding: 24px 32px;
       border-radius: var(--radius-lg);
-      background: rgba(7, 9, 14, 0.92);
-      border: 1px solid rgba(211, 165, 16, 0.4);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
     }
 
     .loader-label {
@@ -256,7 +256,6 @@
       color: var(--text-muted);
     }
 
-    /* Loader SVG animations with unique IDs */
     .loader-container svg {
       width: 120px;
       height: 120px;
@@ -271,9 +270,9 @@
       50% { translate: 0px 56px; }
     }
     @keyframes loader-umbral {
-      0% { stop-color: #d3a5102e; }
-      50% { stop-color: rgba(211, 165, 16, 0.519); }
-      100% { stop-color: #d3a5102e; }
+      0% { stop-color: rgba(173, 216, 230, 0.24); }
+      50% { stop-color: rgba(111, 148, 199, 0.7); }
+      100% { stop-color: rgba(173, 216, 230, 0.24); }
     }
     @keyframes loader-particles {
       0%, 100% { translate: 0px 16px; }
@@ -295,7 +294,7 @@
       animation-delay: 0.5s;
     }
 
-    /* Hero SVG animations with unique IDs */
+    /* Hero SVG animations */
     @keyframes hero-bounce {
       0%, 100% { translate: 0px 36px; }
       50% { translate: 0px 46px; }
@@ -305,9 +304,9 @@
       50% { translate: 0px 56px; }
     }
     @keyframes hero-umbral {
-      0% { stop-color: #d3a5102e; }
-      50% { stop-color: rgba(211, 165, 16, 0.519); }
-      100% { stop-color: #d3a5102e; }
+      0% { stop-color: rgba(173, 216, 230, 0.24); }
+      50% { stop-color: rgba(111, 148, 199, 0.7); }
+      100% { stop-color: rgba(173, 216, 230, 0.24); }
     }
     @keyframes hero-particles {
       0%, 100% { translate: 0px 16px; }
@@ -360,8 +359,8 @@
       gap: 8px;
       padding: 4px 10px 4px 4px;
       border-radius: 999px;
-      border: 1px solid rgba(211, 165, 16, 0.55);
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.32), transparent 60%);
+      border: 1px solid rgba(111, 148, 199, 0.8);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.6), transparent 60%);
       color: var(--text-muted);
       font-size: 0.72rem;
       text-transform: uppercase;
@@ -373,10 +372,10 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe4a1 0, #b7870f 40%, #16151d 100%);
+      background: radial-gradient(circle at 30% 30%, #ffffff 0, #add8e6 40%, #6f94c7 100%);
       box-shadow:
-        0 0 14px rgba(211, 165, 16, 0.8),
-        0 0 26px rgba(120, 82, 255, 0.7);
+        0 0 14px rgba(173, 216, 230, 0.9),
+        0 0 26px rgba(111, 148, 199, 0.7);
     }
 
     .pill span {
@@ -390,14 +389,15 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 14px;
+      color: #0b1120;
     }
 
     .hero-title strong {
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 20px rgba(211, 165, 16, 0.45);
+      text-shadow: 0 0 16px rgba(111, 148, 199, 0.5);
     }
 
     .hero-sub {
@@ -421,14 +421,15 @@
       letter-spacing: 0.16em;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(6, 7, 12, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(255, 255, 255, 0.9);
       color: var(--text-muted);
     }
 
     .chip.gold {
-      border-color: rgba(211, 165, 16, 0.6);
-      color: #fceeb8;
+      border-color: rgba(111, 148, 199, 0.9);
+      color: #0f172a;
+      background: #e0edff;
     }
 
     .hero-actions {
@@ -454,33 +455,33 @@
     }
 
     .btn-primary {
-      background: linear-gradient(120deg, #d3a410, #f3dd93, #b7870f);
-      color: #050509;
+      background: linear-gradient(120deg, #6f94c7, #add8e6, #4876b0);
+      color: #0b1220;
       box-shadow:
-        0 0 20px rgba(211, 165, 16, 0.5),
-        0 20px 40px rgba(0, 0, 0, 0.95);
+        0 0 18px rgba(111, 148, 199, 0.7),
+        0 20px 40px rgba(15, 23, 42, 0.38);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px) scale(1.03);
       box-shadow:
-        0 0 30px rgba(211, 165, 16, 0.9),
-        0 24px 50px rgba(0, 0, 0, 0.98);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 24px 50px rgba(15, 23, 42, 0.5);
       filter: brightness(1.03);
     }
 
     .btn-ghost {
-      background: rgba(4, 7, 15, 0.9);
-      color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      background: rgba(255, 255, 255, 0.9);
+      color: #1e293b;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      box-shadow: 0 0 0 rgba(15, 23, 42, 0);
       transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
     }
 
     .btn-ghost:hover {
-      border-color: rgba(211, 165, 16, 0.6);
-      background: rgba(4, 7, 15, 0.95);
+      border-color: rgba(111, 148, 199, 0.9);
+      background: #f9fafb;
       transform: translateY(-1px);
     }
 
@@ -496,7 +497,7 @@
     .hero-card {
       position: relative;
       border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, rgba(7, 9, 17, 0.95), rgba(3, 3, 7, 0.98));
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 20px;
@@ -508,9 +509,9 @@
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.35), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(120, 82, 255, 0.38), transparent 55%);
-      opacity: 0.18;
+        radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.6), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(111, 148, 199, 0.35), transparent 55%);
+      opacity: 0.25;
       pointer-events: none;
     }
 
@@ -543,9 +544,9 @@
       letter-spacing: 0.16em;
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(211, 165, 16, 0.6);
-      background: rgba(14, 10, 4, 0.92);
-      color: #fbeec4;
+      border: 1px solid rgba(111, 148, 199, 0.9);
+      background: rgba(224, 237, 255, 0.95);
+      color: #0b1120;
     }
 
     .hero-card-body {
@@ -561,15 +562,15 @@
       position: relative;
       padding: 10px;
       border-radius: var(--radius-md);
-      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 70%);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at 50% 0, rgba(173, 216, 230, 0.25), transparent 70%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
       overflow: hidden;
     }
 
     .hero-card-visual-inner {
       border-radius: 18px;
-      background: radial-gradient(circle at top, #151827, #05070b 60%, #04050a 100%);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at top, #e5edff, #f1f3f8 60%, #e2e8f0 100%);
+      border: 1px solid rgba(148, 163, 184, 0.28);
       padding: 12px;
       position: relative;
     }
@@ -583,9 +584,9 @@
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(211, 165, 16, 0.65);
-      color: #fbe6a6;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(173, 216, 230, 0.9);
+      color: #e5edff;
       z-index: 2;
     }
 
@@ -598,8 +599,8 @@
 
     .metric {
       border-radius: 14px;
-      background: rgba(8, 10, 17, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(248, 250, 252, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.38);
       padding: 8px 10px;
     }
 
@@ -614,7 +615,7 @@
     }
 
     .metric-value strong {
-      color: #f6e4a3;
+      color: #0b1120;
     }
 
     .metric-sub {
@@ -633,12 +634,12 @@
     }
 
     .hero-card-footer a {
-      color: #fbe6a6;
+      color: #4876b0;
       text-decoration: none;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      border-bottom: 1px solid rgba(211, 165, 16, 0.4);
+      border-bottom: 1px solid rgba(111, 148, 199, 0.7);
       padding-bottom: 2px;
     }
 
@@ -656,9 +657,9 @@
       letter-spacing: 0.14em;
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       color: var(--text-muted);
-      background: rgba(5, 7, 11, 0.95);
+      background: rgba(248, 250, 252, 0.98);
     }
 
     /* Sections */
@@ -695,10 +696,10 @@
     .card {
       position: relative;
       border-radius: var(--radius-md);
-      background: rgba(7, 9, 16, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
       overflow: hidden;
       cursor: pointer;
       transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
@@ -708,7 +709,7 @@
       content: "";
       position: absolute;
       inset: -50%;
-      background: radial-gradient(circle at 0 0, rgba(211, 165, 16, 0.25), transparent 60%);
+      background: radial-gradient(circle at 0 0, rgba(173, 216, 230, 0.5), transparent 60%);
       opacity: 0;
       transition: opacity var(--transition-med), transform var(--transition-med);
       transform: translate3d(-10%, -10%, 0);
@@ -717,10 +718,10 @@
     .card:hover {
       transform: translateY(-4px) translateZ(0);
       box-shadow:
-        0 18px 50px rgba(0, 0, 0, 0.95),
-        0 0 30px rgba(211, 165, 16, 0.2);
-      border-color: rgba(211, 165, 16, 0.5);
-      background: rgba(9, 11, 20, 0.98);
+        0 18px 50px rgba(15, 23, 42, 0.18),
+        0 0 26px rgba(111, 148, 199, 0.26);
+      border-color: rgba(111, 148, 199, 0.7);
+      background: #f9fafb;
     }
 
     .card:hover::before {
@@ -732,13 +733,14 @@
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-soft);
+      color: #6f94c7;
       margin-bottom: 6px;
     }
 
     .card-title {
       font-size: 0.9rem;
       margin-bottom: 6px;
+      color: #0f172a;
     }
 
     .card-body {
@@ -752,14 +754,14 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: #fbe6a6;
+      color: #4876b0;
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(211, 165, 16, 0.3);
+      border-top: 1px solid rgba(111, 148, 199, 0.6);
       padding: 18px 0 22px;
-      background: radial-gradient(circle at 50% 0, rgba(211, 165, 16, 0.15), transparent 65%);
+      background: radial-gradient(circle at 50% 0, rgba(173, 216, 230, 0.4), transparent 65%);
     }
 
     .footer-shell {
@@ -773,13 +775,13 @@
       font-size: clamp(1.9rem, 4vw, 2.6rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      background: linear-gradient(120deg, #fbe6a6, #d3a410, #f3dd93);
+      background: linear-gradient(120deg, #4876b0, #6f94c7, #add8e6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       text-shadow:
-        0 0 30px rgba(211, 165, 16, 0.9),
-        0 0 70px rgba(0, 0, 0, 1);
+        0 0 24px rgba(111, 148, 199, 0.9),
+        0 0 40px rgba(148, 163, 184, 1);
       margin-bottom: 8px;
     }
 
@@ -790,7 +792,7 @@
     }
 
     .footer-credits span {
-      color: #f1e0a8;
+      color: #1d4ed8;
     }
 
     .footer-links {
@@ -808,7 +810,7 @@
     }
 
     .footer-links a:hover {
-      color: #fbe6a6;
+      color: #4876b0;
       text-decoration: underline;
     }
 
@@ -858,7 +860,7 @@
           <polygon
             transform="rotate(45 100 100)"
             stroke-width="1"
-            stroke="#d3a410"
+            stroke="#6f94c7"
             fill="none"
             points="70,70 148,50 130,130 50,150"
             id="loader-bounce"
@@ -866,7 +868,7 @@
           <polygon
             transform="rotate(45 100 100)"
             stroke-width="1"
-            stroke="#d3a410"
+            stroke="#6f94c7"
             fill="none"
             points="70,70 148,50 130,130 50,150"
             id="loader-bounce2"
@@ -875,7 +877,7 @@
             transform="rotate(45 100 100)"
             stroke-width="2"
             stroke=""
-            fill="#414750"
+            fill="#cbd5f5"
             points="70,70 150,50 130,130 50,150"
           ></polygon>
           <polygon
@@ -886,15 +888,15 @@
           ></polygon>
           <defs>
             <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="loader-gradiente">
-              <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
-              <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
+              <stop style="stop-color: #e5edff;stop-opacity:1" offset="20%"></stop>
+              <stop style="stop-color:#cbd5f5;stop-opacity:1" offset="60%"></stop>
             </linearGradient>
           </defs>
           <polygon
             transform="translate(20, 31)"
             stroke-width="2"
             stroke=""
-            fill="#b7870f"
+            fill="#6f94c7"
             points="80,50 80,75 80,99 40,75"
           ></polygon>
           <polygon
@@ -906,9 +908,9 @@
           ></polygon>
           <defs>
             <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="loader-gradiente2">
-              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+              <stop style="stop-color: #d3e9ff00;stop-opacity:1" offset="20%"></stop>
               <stop
-                style="stop-color:#d3a51054;stop-opacity:1"
+                style="stop-color:#add8e6;stop-opacity:1"
                 offset="100%"
                 id="loader-animatedStop"
               ></stop>
@@ -918,7 +920,7 @@
             transform="rotate(180 100 100) translate(20, 20)"
             stroke-width="2"
             stroke=""
-            fill="#d3a410"
+            fill="#6f94c7"
             points="80,50 80,75 80,99 40,75"
           ></polygon>
           <polygon
@@ -930,9 +932,9 @@
           ></polygon>
           <defs>
             <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="loader-gradiente3">
-              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+              <stop style="stop-color: #d3e9ff00;stop-opacity:1" offset="20%"></stop>
               <stop
-                style="stop-color:#d3a51054;stop-opacity:1"
+                style="stop-color:#add8e6;stop-opacity:1"
                 offset="100%"
                 id="loader-animatedStop2"
               ></stop>
@@ -942,7 +944,7 @@
             transform="rotate(45 100 100) translate(80, 95)"
             stroke-width="2"
             stroke=""
-            fill="#ffe4a1"
+            fill="#ffffff"
             points="5,0 5,5 0,5 0,0"
             id="loader-particles-1"
           ></polygon>
@@ -950,7 +952,7 @@
             transform="rotate(45 100 100) translate(80, 55)"
             stroke-width="2"
             stroke=""
-            fill="#ccb069"
+            fill="#c4ddff"
             points="6,0 6,6 0,6 0,0"
             id="loader-particles-2"
           ></polygon>
@@ -958,21 +960,21 @@
             transform="rotate(45 100 100) translate(70, 80)"
             stroke-width="2"
             stroke=""
-            fill="#fff"
+            fill="#cbd5f5"
             points="2,0 2,2 0,2 0,0"
             id="loader-particles-3"
           ></polygon>
           <polygon
             stroke-width="2"
             stroke=""
-            fill="#292d34"
+            fill="#e5e7eb"
             points="29.5,99.8 100,142 100,172 29.5,130"
           ></polygon>
           <polygon
             transform="translate(50, 92)"
             stroke-width="2"
             stroke=""
-            fill="#1f2127"
+            fill="#dde3f3"
             points="50,50 120.5,8 120.5,35 50,80"
           ></polygon>
         </g>
@@ -985,7 +987,7 @@
   <header>
     <div class="nav-shell" id="navShell">
       <a href="index.html" class="logo">
-        <div class="logo-mark"></div>
+        <img src="img.png" alt="ErgoMatrix logo" class="logo-img" />
         <div>
           <div class="logo-text-main">ErgoMatrix</div>
           <div class="logo-text-sub">Posture Pro System</div>
@@ -1064,7 +1066,7 @@
                           <polygon
                             transform="rotate(45 100 100)"
                             stroke-width="1"
-                            stroke="#d3a410"
+                            stroke="#6f94c7"
                             fill="none"
                             points="70,70 148,50 130,130 50,150"
                             id="hero-bounce"
@@ -1072,7 +1074,7 @@
                           <polygon
                             transform="rotate(45 100 100)"
                             stroke-width="1"
-                            stroke="#d3a410"
+                            stroke="#6f94c7"
                             fill="none"
                             points="70,70 148,50 130,130 50,150"
                             id="hero-bounce2"
@@ -1081,7 +1083,7 @@
                             transform="rotate(45 100 100)"
                             stroke-width="2"
                             stroke=""
-                            fill="#414750"
+                            fill="#cbd5f5"
                             points="70,70 150,50 130,130 50,150"
                           ></polygon>
                           <polygon
@@ -1092,15 +1094,15 @@
                           ></polygon>
                           <defs>
                             <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="hero-gradiente">
-                              <stop style="stop-color: #1e2026;stop-opacity:1" offset="20%"></stop>
-                              <stop style="stop-color:#414750;stop-opacity:1" offset="60%"></stop>
+                              <stop style="stop-color: #e5edff;stop-opacity:1" offset="20%"></stop>
+                              <stop style="stop-color:#cbd5f5;stop-opacity:1" offset="60%"></stop>
                             </linearGradient>
                           </defs>
                           <polygon
                             transform="translate(20, 31)"
                             stroke-width="2"
                             stroke=""
-                            fill="#b7870f"
+                            fill="#6f94c7"
                             points="80,50 80,75 80,99 40,75"
                           ></polygon>
                           <polygon
@@ -1112,9 +1114,9 @@
                           ></polygon>
                           <defs>
                             <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="hero-gradiente2">
-                              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+                              <stop style="stop-color: #d3e9ff00;stop-opacity:1" offset="20%"></stop>
                               <stop
-                                style="stop-color:#d3a51054;stop-opacity:1"
+                                style="stop-color:#add8e6;stop-opacity:1"
                                 offset="100%"
                                 id="hero-animatedStop"
                               ></stop>
@@ -1124,7 +1126,7 @@
                             transform="rotate(180 100 100) translate(20, 20)"
                             stroke-width="2"
                             stroke=""
-                            fill="#d3a410"
+                            fill="#6f94c7"
                             points="80,50 80,75 80,99 40,75"
                           ></polygon>
                           <polygon
@@ -1136,9 +1138,9 @@
                           ></polygon>
                           <defs>
                             <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="hero-gradiente3">
-                              <stop style="stop-color: #d3a51000;stop-opacity:1" offset="20%"></stop>
+                              <stop style="stop-color: #d3e9ff00;stop-opacity:1" offset="20%"></stop>
                               <stop
-                                style="stop-color:#d3a51054;stop-opacity:1"
+                                style="stop-color:#add8e6;stop-opacity:1"
                                 offset="100%"
                                 id="hero-animatedStop2"
                               ></stop>
@@ -1148,7 +1150,7 @@
                             transform="rotate(45 100 100) translate(80, 95)"
                             stroke-width="2"
                             stroke=""
-                            fill="#ffe4a1"
+                            fill="#ffffff"
                             points="5,0 5,5 0,5 0,0"
                             id="hero-particles-1"
                           ></polygon>
@@ -1156,7 +1158,7 @@
                             transform="rotate(45 100 100) translate(80, 55)"
                             stroke-width="2"
                             stroke=""
-                            fill="#ccb069"
+                            fill="#c4ddff"
                             points="6,0 6,6 0,6 0,0"
                             id="hero-particles-2"
                           ></polygon>
@@ -1164,21 +1166,21 @@
                             transform="rotate(45 100 100) translate(70, 80)"
                             stroke-width="2"
                             stroke=""
-                            fill="#fff"
+                            fill="#cbd5f5"
                             points="2,0 2,2 0,2 0,0"
                             id="hero-particles-3"
                           ></polygon>
                           <polygon
                             stroke-width="2"
                             stroke=""
-                            fill="#292d34"
+                            fill="#e5e7eb"
                             points="29.5,99.8 100,142 100,172 29.5,130"
                           ></polygon>
                           <polygon
                             transform="translate(50, 92)"
                             stroke-width="2"
                             stroke=""
-                            fill="#1f2127"
+                            fill="#dde3f3"
                             points="50,50 120.5,8 120.5,35 50,80"
                           ></polygon>
                         </g>
@@ -1256,7 +1258,7 @@
     <div class="footer-shell">
       <div class="footer-name">ErgoMatrix</div>
       <div class="footer-credits">
-        Website by <span>Tanuj Sharma</span> & <span>Sparsh Jain</span>
+        Website by <span>Aetheron Web Services</span>
       </div>
       <div class="footer-links">
         <a href="#">Privacy</a>
