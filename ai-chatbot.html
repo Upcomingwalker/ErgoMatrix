@@ -887,259 +887,245 @@
   </footer>
 
   <script>
-    // ❗ Frontend OpenRouter usage.
-    // You *are* exposing this key in the browser. Rotate it after testing.
-    const OPENROUTER_API_KEY = "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";
+  // ❗ LOCAL TESTING ONLY – DO NOT DEPLOY PUBLICLY WITH THIS KEY EXPOSED
+  const OPENROUTER_API_KEY = "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";
 
-    // Header scroll effect
-    const navShell = document.getElementById("navShell");
-    window.addEventListener("scroll", () => {
-      if (!navShell) return;
-      if (window.scrollY > 20) {
-        navShell.classList.add("scrolled");
-      } else {
-        navShell.classList.remove("scrolled");
-      }
-    });
+  // Header scroll effect
+  const navShell = document.getElementById("navShell");
+  window.addEventListener("scroll", () => {
+    if (!navShell) return;
+    if (window.scrollY > 20) {
+      navShell.classList.add("scrolled");
+    } else {
+      navShell.classList.remove("scrolled");
+    }
+  });
 
-    const chatBody = document.getElementById("chatBody");
-    const typingIndicator = document.getElementById("typingIndicator");
-    const promptInput = document.getElementById("promptInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const clearBtn = document.getElementById("clearChat");
-    const exampleButtons = document.querySelectorAll(".example-pill");
+  const chatBody = document.getElementById("chatBody");
+  const typingIndicator = document.getElementById("typingIndicator");
+  const promptInput = document.getElementById("promptInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const clearBtn = document.getElementById("clearChat");
+  const exampleButtons = document.querySelectorAll(".example-pill");
 
-    // Hardcoded Q&A knowledge base (keyword/intent matching)
-    const knowledgeBase = [
-      {
-        keywords: ["what is ergomatrix", "about ergomatrix", "what problem"],
-        answer:
-          "ErgoMatrix is a posture-focused health tech company that pairs the Eye-Q Sensor and Mesh-Up chair cover to actively correct your posture at the desk. It helps prevent chronic pain, fatigue, and spinal strain caused by long hours of sitting."
-      },
-      {
-        keywords: ["different from a normal ergonomic chair", "different from normal chair", "how is ergomatrix different"],
-        answer:
-          "Traditional ergonomic chairs mostly support you passively. ErgoMatrix adds active sensing with the Eye-Q Sensor and haptic feedback through Mesh-Up, creating a real-time feedback loop that gently nudges you whenever your posture collapses."
-      },
-      {
-        keywords: ["future vision", "future of ergomatrix", "vision of ergomatrix", "our future"],
-        answer:
-          "The future vision of ErgoMatrix is to become both a SaaS posture analytics platform for companies and a technology layer built into smart furniture. That means posture dashboards for teams and ErgoMatrix intelligence inside future chairs and desks."
-      },
-      {
-        keywords: ["what is the eye-q", "eye q sensor", "eye-q sensor", "how does eye-q work"],
-        answer:
-          "The Eye-Q Sensor is a compact desk sensor that sits beside your screen and measures the distance between your head and the display. When you lean too close or slump away from your calibrated position, it detects that change and triggers Mesh-Up to alert you."
-      },
-      {
-        keywords: ["what is the mesh-up", "mesh up", "mesh-up chair cover", "how does mesh-up feel"],
-        answer:
-          "Mesh-Up is a universal mesh cover that wraps around your office chair and places haptic modules near your lower back. When your posture drifts, it sends a gentle, brief vibration to remind you to sit upright without being harsh or distracting."
-      },
-      {
-        keywords: ["posture pro system", "full posture pro", "eye-q and mesh-up together", "bundle"],
-        answer:
-          "The Posture Pro system combines the Eye-Q Sensor and Mesh-Up. Eye-Q tracks how you sit relative to the screen, and Mesh-Up turns posture problems into soft vibrations in your lower back, giving you a complete feedback loop while you work."
-      },
-      {
-        keywords: ["set up the full posture pro", "how do i set up posture pro", "setup posture pro"],
-        answer:
-          "To set up Posture Pro, first place the Eye-Q Sensor near your screen with a clear view of your head. Then attach Mesh-Up so the lower vibration area sits at your lumbar curve. Finally, use the software or guide on the How To Use page to calibrate your healthy sitting distance."
-      },
-      {
-        keywords: ["my lower back hurts", "lower back pain", "back hurts while working"],
-        answer:
-          "For lower back pain at the desk, use Mesh-Up so its vibration zone sits right at your lumbar curve and respond to each cue by stacking your head over your shoulders and hips. Combine that with short movement breaks every 45–60 minutes and a chair height that lets your feet rest flat on the floor."
-      },
-      {
-        keywords: ["healthy distance from my screen", "how far should my eyes be", "screen distance", "distance from monitor"],
-        answer:
-          "A common healthy range is roughly an arm's length from your screen, often around 50–70cm for most setups. Eye-Q helps keep you in that comfort zone by detecting when you lean in or drift too far and using Mesh-Up to bring your posture back."
-      },
-      {
-        keywords: ["daily posture habits", "habits do you recommend", "posture habits", "daily posture tips"],
-        answer:
-          "Good daily habits include keeping elbows near 90°, top of your screen at about eye level, feet flat on the floor, and taking short movement breaks every hour. Posture Pro adds micro-corrections by vibrating whenever it senses a slump so you can reset quickly."
-      },
-      {
-        keywords: ["who created this website", "who made this website", "who made you", "who created you"],
-        answer:
-          "Tanuj Sharma and Sparsh Jain created me and this website."
-      },
-      {
-        keywords: ["what pages does the ergomatrix website have", "site map", "what pages are there"],
-        answer:
-          "The ErgoMatrix website includes: a Home page, an About & Future page, a Products page, a How To Use page, this AI Posture Coach page, and a Credits page that highlights the creators and tech stack."
-      },
-      {
-        keywords: ["what is posture pro", "posture pro"],
-        answer:
-          "Posture Pro is the name of the full ErgoMatrix system: the Eye-Q Sensor plus Mesh-Up chair cover working together to sense posture and give real-time feedback."
-      },
-      {
-        keywords: ["what is this project about", "what is this project", "what is this website about"],
-        answer:
-          "This project is a concept site for ErgoMatrix, a posture-driven health technology product. The website showcases the company story, products, setup instructions, a posture chatbot, and credits for the creators."
-      }
-    ];
+  // Hardcoded Q&A knowledge base (keyword/intent matching)
+  const knowledgeBase = [
+    {
+      keywords: ["what is ergomatrix", "about ergomatrix", "what problem"],
+      answer:
+        "ErgoMatrix is a posture-focused health tech company that pairs the Eye-Q Sensor and Mesh-Up chair cover to actively correct your posture at the desk. It helps prevent chronic pain, fatigue, and spinal strain caused by long hours of sitting."
+    },
+    {
+      keywords: ["different from a normal ergonomic chair", "different from normal chair", "how is ergomatrix different"],
+      answer:
+        "Traditional ergonomic chairs mostly support you passively. ErgoMatrix adds active sensing with the Eye-Q Sensor and haptic feedback through Mesh-Up, creating a real-time feedback loop that gently nudges you whenever your posture collapses."
+    },
+    {
+      keywords: ["future vision", "future of ergomatrix", "vision of ergomatrix", "our future"],
+      answer:
+        "The future vision of ErgoMatrix is to become both a SaaS posture analytics platform for companies and a technology layer built into smart furniture. That means posture dashboards for teams and ErgoMatrix intelligence inside future chairs and desks."
+    },
+    {
+      keywords: ["what is the eye-q", "eye q sensor", "eye-q sensor", "how does eye-q work"],
+      answer:
+        "The Eye-Q Sensor is a compact desk sensor that sits beside your screen and measures the distance between your head and the display. When you lean too close or slump away from your calibrated position, it detects that change and can be paired with haptics to alert you."
+    },
+    {
+      keywords: ["what is the mesh-up", "mesh up", "mesh-up chair cover", "how does mesh-up feel"],
+      answer:
+        "Mesh-Up is a universal mesh cover that wraps around your office chair and places haptic modules near your lower back. When your posture drifts, it sends a gentle, brief vibration to remind you to sit upright without being harsh or distracting."
+    },
+    {
+      keywords: ["posture pro system", "full posture pro", "eye-q and mesh-up together", "bundle"],
+      answer:
+        "The Posture Pro system combines the Eye-Q Sensor and Mesh-Up. Eye-Q tracks how you sit relative to the screen, and Mesh-Up turns posture problems into soft vibrations in your lower back, giving you a complete feedback loop while you work."
+    },
+    {
+      keywords: ["set up the full posture pro", "how do i set up posture pro", "setup posture pro"],
+      answer:
+        "To set up Posture Pro, first place the Eye-Q Sensor near your screen with a clear view of your head. Then attach Mesh-Up so the lower vibration area sits at your lumbar curve. Finally, follow the How To Use guide to calibrate your healthy sitting distance."
+    },
+    {
+      keywords: ["my lower back hurts", "lower back pain", "back hurts while working"],
+      answer:
+        "For lower back pain at the desk, place support at your lumbar curve, keep feet flat on the floor, and use short movement breaks every 45–60 minutes. If you have Mesh-Up, respond to each vibration by stacking head, shoulders, and hips in one line."
+    },
+    {
+      keywords: ["healthy distance from my screen", "how far should my eyes be", "screen distance", "distance from monitor"],
+      answer:
+        "A common healthy range is roughly an arm's length from your screen, often around 50–70cm for most setups. Consistently leaning much closer can cause eye strain and neck stress over time."
+    },
+    {
+      keywords: ["daily posture habits", "habits do you recommend", "posture habits", "daily posture tips"],
+      answer:
+        "Useful daily habits include: keeping elbows near 90°, top of the screen roughly at eye level, feet flat on the floor, and taking micro-breaks to stand or walk every hour. Small corrections repeated all day matter more than one perfect sitting position."
+    },
+    {
+      keywords: ["who created this website", "who made this website", "who made you", "who created you"],
+      answer:
+        "Tanuj Sharma and Sparsh Jain created this website and the ErgoMatrix posture coach concept."
+    },
+    {
+      keywords: ["what pages does the ergomatrix website have", "site map", "what pages are there"],
+      answer:
+        "The ErgoMatrix website includes a Home page, an About & Future page, a Products page, a How To Use page, this AI Posture Coach page, and a Credits page."
+    },
+    {
+      keywords: ["what is posture pro", "posture pro"],
+      answer:
+        "Posture Pro is the full ErgoMatrix setup: Eye-Q Sensor plus Mesh-Up working together to sense posture and nudge you back into a healthier position."
+    },
+    {
+      keywords: ["what is this project about", "what is this project", "what is this website about"],
+      answer:
+        "This project is a concept site for ErgoMatrix, a posture-focused health technology idea. It showcases the story, hardware concepts, setup flow, an AI posture coach, and creator credits."
+    }
+  ];
 
-    function addMessage(role, text) {
-      const row = document.createElement("div");
-      row.classList.add("msg-row", role === "user" ? "user" : "bot");
-      row.setAttribute("role", "article");
-      row.setAttribute("aria-label", `Message from ${role === "user" ? "you" : "AI coach"}`);
+  function addMessage(role, text) {
+    const row = document.createElement("div");
+    row.classList.add("msg-row", role === "user" ? "user" : "bot");
+    row.setAttribute("role", "article");
+    row.setAttribute("aria-label", `Message from ${role === "user" ? "you" : "AI coach"}`);
 
-      const avatar = document.createElement("div");
-      avatar.classList.add("msg-avatar");
-      avatar.setAttribute("aria-hidden", "true");
+    const avatar = document.createElement("div");
+    avatar.classList.add("msg-avatar");
+    avatar.setAttribute("aria-hidden", "true");
 
-      const contentWrap = document.createElement("div");
-      const bubble = document.createElement("div");
-      bubble.classList.add("msg-bubble");
-      bubble.textContent = text;
+    const contentWrap = document.createElement("div");
+    const bubble = document.createElement("div");
+    bubble.classList.add("msg-bubble");
+    bubble.textContent = text;
 
-      const meta = document.createElement("div");
-      meta.classList.add("msg-meta");
-      meta.textContent = role === "user" ? "You" : "Coach";
-      meta.setAttribute("aria-label", `Sender: ${role === "user" ? "You" : "AI Coach"}`);
+    const meta = document.createElement("div");
+    meta.classList.add("msg-meta");
+    meta.textContent = role === "user" ? "You" : "Coach";
+    meta.setAttribute("aria-label", `Sender: ${role === "user" ? "You" : "AI Coach"}`);
 
-      contentWrap.appendChild(bubble);
-      contentWrap.appendChild(meta);
+    contentWrap.appendChild(bubble);
+    contentWrap.appendChild(meta);
 
-      if (role === "user") {
-        row.appendChild(contentWrap);
-        row.appendChild(avatar);
-      } else {
-        row.appendChild(avatar);
-        row.appendChild(contentWrap);
-      }
-
-      chatBody.appendChild(row);
-      chatBody.scrollTop = chatBody.scrollHeight;
+    if (role === "user") {
+      row.appendChild(contentWrap);
+      row.appendChild(avatar);
+    } else {
+      row.appendChild(avatar);
+      row.appendChild(contentWrap);
     }
 
-    // Only return a predefined answer if there is a real match.
-    function findKbAnswer(question) {
-      const lower = question.toLowerCase();
+    chatBody.appendChild(row);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
 
-      for (const item of knowledgeBase) {
-        if (item.keywords.some(k => lower.includes(k))) {
-          return item.answer;
-        }
+  function findKbAnswer(question) {
+    const lower = question.toLowerCase();
+    for (const item of knowledgeBase) {
+      if (item.keywords.some(k => lower.includes(k))) {
+        return item.answer;
       }
-      return null;
     }
+    return null;
+  }
 
-    // OpenRouter chat completion with reasoning enabled
-    async function callOpenRouter(userMessage) {
-      const systemPrompt =
-        "You are the 'ErgoMatrix Local Coach', a narrow FAQ and posture assistant. " +
-        "You ONLY answer questions about ErgoMatrix, the Posture Pro system, Eye-Q Sensor, Mesh-Up, posture tips for desk workers, " +
-        "and this website. If the question is outside this scope, say you can only help with those topics.";
+  // FRONTEND-ONLY OpenRouter call – LOCAL TESTING ONLY
+  async function callOpenRouter(userMessage) {
+    const systemPrompt =
+      "You are the 'ErgoMatrix Local Coach', a narrow FAQ and posture assistant. " +
+      "You ONLY answer questions about ErgoMatrix, the Posture Pro system, Eye-Q Sensor, Mesh-Up, posture tips for desk workers, " +
+      "and this website. If the question is outside this scope, say you can only help with those topics.";
 
-      const body = {
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENROUTER_API_KEY,
+        "HTTP-Referer": window.location.origin,
+        "X-Title": "ErgoMatrix Local Coach"
+      },
+      body: JSON.stringify({
         model: "openai/gpt-oss-20b:free",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userMessage }
         ],
-        reasoning: {
-          enabled: true
-        }
-      };
+        reasoning: { enabled: true }
+      })
+    });
 
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + OPENROUTER_API_KEY,
-          "Content-Type": "application/json",
-          // Optional but nice for OpenRouter dashboards
-          "HTTP-Referer": window.location.origin,
-          "X-Title": "ErgoMatrix Local Coach"
-        },
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) {
-        throw new Error("OpenRouter API error: " + res.status);
-      }
-
-      const data = await res.json();
-      const choice = data?.choices?.[0];
-      const content = choice?.message?.content;
-
-      if (!content || typeof content !== "string") {
-        throw new Error("No content from model");
-      }
-
-      return content.trim();
+    if (!res.ok) {
+      const txt = await res.text();
+      console.error("OpenRouter error:", res.status, txt);
+      throw new Error("OpenRouter error: " + res.status);
     }
 
-    async function sendMessage() {
-      const text = promptInput.value.trim();
-      if (!text) return;
+    const data = await res.json();
+    const content = data?.choices?.[0]?.message?.content;
+    if (!content || typeof content !== "string") {
+      throw new Error("No content from OpenRouter");
+    }
+    return content.trim();
+  }
 
-      addMessage("user", text);
-      promptInput.value = "";
+  async function sendMessage() {
+    const text = promptInput.value.trim();
+    if (!text) return;
 
-      // Show typing indicator
-      typingIndicator.style.display = "flex";
-      typingIndicator.setAttribute("aria-label", "Coach is thinking about your question");
+    addMessage("user", text);
+    promptInput.value = "";
 
-      // Slight delay to feel responsive
-      await new Promise(r => setTimeout(r, 250));
+    typingIndicator.style.display = "flex";
+    typingIndicator.setAttribute("aria-label", "Coach is thinking about your question");
 
-      let reply;
+    await new Promise(r => setTimeout(r, 250));
 
-      // 1) First, see if this matches a predefined FAQ
-      const kb = findKbAnswer(text);
-      if (kb) {
-        reply = kb;
-      } else {
-        // 2) Otherwise, call OpenRouter
-        try {
-          reply = await callOpenRouter(text);
-        } catch (err) {
-          console.error(err);
-          reply =
-            "I had an issue reaching the AI backend. For now, I can only say this: I’m here to help with ErgoMatrix, Posture Pro, Eye-Q, Mesh-Up, posture tips for desk workers, and this website.";
-        }
+    let reply;
+    const kb = findKbAnswer(text);
+    if (kb) {
+      reply = kb;
+    } else {
+      try {
+        reply = await callOpenRouter(text);
+      } catch (err) {
+        console.error(err);
+        reply =
+          "I could not reach the AI backend right now. I can only help with ErgoMatrix, Posture Pro, Eye-Q, Mesh-Up, posture tips, and this website.";
       }
-
-      typingIndicator.style.display = "none";
-      addMessage("bot", reply);
     }
 
-    sendBtn.addEventListener("click", sendMessage);
-    promptInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
+    typingIndicator.style.display = "none";
+    addMessage("bot", reply);
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  promptInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  clearBtn.addEventListener("click", () => {
+    chatBody.innerHTML = "";
+    addMessage(
+      "bot",
+      "Chat cleared. Ask me anything about ErgoMatrix, Posture Pro, Eye-Q, Mesh-Up, posture tips, or this website."
+    );
+  });
+
+  exampleButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      promptInput.value = btn.textContent.trim();
+      promptInput.focus();
+    });
+
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    clearBtn.addEventListener("click", () => {
-      chatBody.innerHTML = "";
-      addMessage(
-        "bot",
-        "Chat cleared. Ask me anything about ErgoMatrix, Posture Pro, Eye-Q, Mesh-Up, posture tips, or this website."
-      );
-    });
-
-    exampleButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
         promptInput.value = btn.textContent.trim();
         promptInput.focus();
-      });
-
-      btn.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          promptInput.value = btn.textContent.trim();
-          promptInput.focus();
-        }
-      });
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
