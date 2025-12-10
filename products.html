@@ -284,6 +284,23 @@
       line-height: 1.7;
     }
 
+    /* Main product hero image */
+    .product-hero {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 18px;
+    }
+
+    .product-hero-img {
+      width: min(520px, 100%);
+      border-radius: 20px;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.2);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      object-fit: cover;
+    }
+
     /* Products grid */
     .products-grid {
       display: grid;
@@ -355,6 +372,23 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       margin-bottom: 10px;
+    }
+
+    /* Mini product image */
+    .product-mini {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .product-mini-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
     }
 
     .product-body {
@@ -784,12 +818,30 @@
         </p>
       </section>
 
+      <!-- Main product hero image -->
+      <section class="product-hero" aria-label="Posture Pro main preview">
+        <img
+          src="product.png"
+          alt="ErgoMatrix Posture Pro main product preview"
+          class="product-hero-img"
+        />
+      </section>
+
       <section class="products-grid" aria-label="Available products">
         <!-- Eye-Q Sensor -->
         <article class="product-card" data-product="eyeq">
           <div class="product-badge">Sensor only</div>
           <h2 class="product-title">Eye-Q Sensor</h2>
           <div class="product-subtitle">Precision distance sensing</div>
+
+          <div class="product-mini">
+            <img
+              src="product.png"
+              alt="Eye-Q Sensor product mini view"
+              class="product-mini-img"
+            />
+          </div>
+
           <p class="product-body">
             A compact UV-powered sensor that sits beside your screen and measures the true distance
             between your forehead and display, catching slumps and leans before they become habits.
@@ -815,6 +867,15 @@
           <div class="product-badge">Best value</div>
           <h2 class="product-title">Posture Pro Bundle</h2>
           <div class="product-subtitle">Eye-Q + Mesh-Up</div>
+
+          <div class="product-mini">
+            <img
+              src="product.png"
+              alt="Posture Pro Bundle product mini view"
+              class="product-mini-img"
+            />
+          </div>
+
           <p class="product-body">
             Combine live sensing with haptic feedback for the full ErgoMatrix experience. The bundle
             connects distance tracking and lower-back cues into one seamless posture correction loop.
@@ -949,7 +1010,7 @@
 
     const qtyElems = {
       eyeq: document.getElementById("qty-eyeq"),
-      mesh: document.getElementById("qty-mesh"),
+      mesh: { textContent: "0" }, // mesh not shown, keep placeholder object
       bundle: document.getElementById("qty-bundle")
     };
 
